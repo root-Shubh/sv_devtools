@@ -285,6 +285,11 @@
         "command": "devtool.ctx.openRegex",
         "title": "Dev Tool: Open in Regex Playground",
         "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.openWorkbench",
+        "title": "Dev Tool: Open Workbench (input and output)",
+        "category": "Dev Tool"
       }
     ],
     "menus": {
@@ -374,6 +379,11 @@
         }
       ],
       "devtool.editor": [
+        {
+          "command": "devtool.openWorkbench",
+          "when": "editorHasSelection",
+          "group": "0_workbench@1"
+        },
         {
           "command": "devtool.ctx.base64Encode",
           "when": "editorHasSelection",
@@ -527,6 +537,12 @@
         "key": "ctrl+alt+t",
         "mac": "cmd+alt+t",
         "args": "text-diff",
+        "when": "true"
+      },
+      {
+        "command": "devtool.openWorkbench",
+        "key": "ctrl+alt+w",
+        "mac": "cmd+alt+w",
         "when": "true"
       }
     ],
