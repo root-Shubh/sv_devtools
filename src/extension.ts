@@ -12,6 +12,8 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("regex-playground", async () => (await import("./tools/regex/regexTool")).tool);
   registerTool("regex-library", async () => (await import("./tools/regex/libraryTool")).tool);
   registerTool("json-format", async () => (await import("./tools/json/jsonTool")).tool);
+  registerTool("json-compare", async () => (await import("./tools/json/compareTool")).tool);
+  context.subscriptions.push(vscode.commands.registerCommand("devtool.jsonFormat", async () => (await import("./tools/json/jsonTool")).run()));
   const regex = () => import("./tools/regex/regexTool");
   context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(async (e) => (await regex()).onDocumentChanged(e)));
   const diff = () => import("./tools/text/diffTool");
