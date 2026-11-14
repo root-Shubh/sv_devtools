@@ -13,7 +13,25 @@ export async function run(): Promise<void> {
     void vscode.window.showErrorMessage(r.message);
     return;
   }
+  // Optional HMAC check. The secret is used for this call only and is never stored.
+  let verification: string[] = [];
+  const choice = await vscode.window.showQuickPick(["Skip verification", "Verify with a secret (HMAC)"], {
+    placeHolder: "Verify the signature too?"
+  });
+  if (choice?.startsWith("Verify")) {
+    const secret = await vscode.window.showInputBox({
+      prompt: "Secret (used once for this check, not saved)",
+      password: true
+    });
+    if (secret) {
+      const { verifyJwtHmac } = await import("./jwtVerify");
+      const v = verifyJwtHmac(token, secret);
+      verification = ["== Signature check ==", v.ok ? (v.valid ? "✔ " : "✘ ") + v.message : `! ${v.message}`, ""];
+    }
+  }
+
   const lines = [
+    ...verification,
     "== Notes ==",
     ...r.value.notes.map((n) => `! ${n}`),
     "",
