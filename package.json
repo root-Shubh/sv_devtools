@@ -4,7 +4,7 @@
   "description": "A lightweight developer toolbox: text diff, regex, JSON, encoding, generators and developer utilities.",
   "version": "1.0.0",
   "publisher": "root-shubh",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "icon": "media/icon.png",
   "repository": {
     "type": "git",
