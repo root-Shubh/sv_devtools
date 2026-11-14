@@ -607,7 +607,8 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "node --test out/test/",
-    "package": "vsce package"
+    "package": "vsce package",
+    "check:changelog": "node scripts/check-changelog.js"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

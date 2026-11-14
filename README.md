@@ -54,6 +54,10 @@ code --install-extension sv-devtools-0.1.0.vsix
 
 The extension is not published to the Visual Studio Marketplace yet.
 
+## Privacy
+
+Dev Tool works entirely on your machine. It makes no network requests, collects no telemetry and needs no account. It stores only your favourites and recently used tools. Read the full statement in [PRIVACY.md](PRIVACY.md).
+
 ## Notes and limits
 
 - **JWT:** decoding shows the header and payload only. The signature is **not** verified, so do not trust claims on their own.
