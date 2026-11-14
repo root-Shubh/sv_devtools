@@ -101,6 +101,7 @@ export function activate(context: vscode.ExtensionContext): void {
       // Reloading the window restarts every extension, including Dev Tool.
       vscode.commands.executeCommand("workbench.action.reloadWindow")
     ),
+    vscode.commands.registerCommand("devtool.openWorkbench", async () => (await import("./ui/workbench")).openWorkbench(context)),
     vscode.commands.registerCommand("devtool.version", () =>
       vscode.window.showInformationMessage(`Dev Tool version ${String(context.extension.packageJSON.version)}`)
     )
