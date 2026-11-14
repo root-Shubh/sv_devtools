@@ -2,6 +2,11 @@
 
 All notable changes to Dev Tool are listed here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- Documentation rewritten: README reorganised, new user guide (every tool, shortcuts, menus, limits), developer guide (architecture, adding a tool, testing, CI, packaging) and contributing guide (branch flow, commits, pull requests, Jira).
+
 ## [0.1.0] - 2026-11-14
 
 First release.

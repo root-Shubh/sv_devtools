@@ -1,36 +1,66 @@
 # Dev Tool
 
-A lightweight developer toolbox for VS Code. Common utilities are a click or a keystroke away, without leaving the editor.
+A lightweight developer toolbox for VS Code. Everyday utilities (diff, regex, JSON, encoding, generators and developer references) are a click or a keystroke away, without leaving the editor.
 
-- **Fast:** tools load when you open them. Activation only registers the sidebar and commands.
-- **Local:** everything runs on your machine. No network requests, telemetry or account.
+- **Fast:** tools load when you use them. Activation only registers the sidebar and commands.
+- **Local:** everything runs on your machine. No network requests, telemetry or accounts.
 - **Native:** uses VS Code's diff editor, quick picks, input boxes, theme colours and Markdown preview.
+- **Safe:** output opens in a new document. Your source changes only when you click **Replace source**.
 
-## Tools
+## Documentation
+
+| Document | For |
+|---|---|
+| [User guide](docs/user-guide.md) | Using every tool, shortcuts and menus |
+| [Developer guide](docs/developer-guide.md) | Architecture, adding a tool, testing, CI and packaging |
+| [Contributing](docs/contributing.md) | Branches, commits, pull requests and Jira |
+| [Changelog](CHANGELOG.md) | Release notes |
+
+## Quick start
+
+1. Open the **Dev Tool** icon in the Activity Bar (left edge).
+2. Pick a category, or press **Ctrl+Alt+D** (Cmd+Alt+D on macOS) to search.
+3. Select text and right-click for quick actions, or run a tool and paste your input.
+
+Shortcuts: **Ctrl+Alt+R** Regex Playground, **Ctrl+Alt+J** JSON, **Ctrl+Alt+T** Text Diff.
+
+## Tools at a glance
 
 | Category | Tools |
 |---|---|
-| Text & Diff | Text diff, quick diff, text utilities (dedupe, sort, trim, find/replace, line endings, counts) |
-| Regex | Regex playground with live matches and replace preview, regex library |
-| JSON & Data | Formatter and validator, comparator, JSON to TypeScript, JSON/CSV, JSONPath, escape |
-| Encoding & Conversion | Base64, URL, HTML entities, Unicode, hex, binary, string escape, timestamps |
-| Generators | UUID v4, hashes, random strings, passwords, Lorem Ipsum, sample JSON, SQL INSERT |
-| Developer Utilities | JWT decoder, cron helper, Unix permissions, colour converter, SQL formatter, XML, Markdown preview, escape visualiser, HTTP status and MIME references |
+| Text & Diff | Text diff, quick diff, text utilities |
+| Regex | Regex playground, regex library |
+| JSON & Data | Formatter and validator, comparator, JSON to TypeScript, JSON utilities |
+| Encoding & Conversion | Base64, URL encoding, encoding and conversion, timestamps |
+| Generators | UUID v4, hashes, generators (random strings, passwords, Lorem Ipsum, sample JSON, SQL INSERT) |
+| Developer Utilities | JWT decoder, developer utilities (cron, permissions, colours, SQL), references (XML, Markdown preview, escape visualiser, HTTP status, MIME types) |
 
-## Using it
+See the [user guide](docs/user-guide.md) for what each tool does.
 
-- Open the **Dev Tool** icon in the Activity Bar.
-- Search with **Ctrl+Alt+D** (Cmd+Alt+D on macOS).
-- Shortcuts: **Ctrl+Alt+R** regex playground, **Ctrl+Alt+J** JSON, **Ctrl+Alt+T** text diff.
-- Select text and right-click for Base64, JSON formatting, hashes, dedupe, clipboard compare and regex.
+## Install
 
-Output opens in a new document. Your source is changed only when you click **Replace source**.
+Build the package and install it:
 
-## Notes
+```bash
+npm install
+npm run package          # creates sv-devtools-<version>.vsix
+```
 
-- **JWT:** decoding shows the header and payload only. It does not verify the signature, so do not trust claims on their own.
-- **Regex:** matching uses the JavaScript engine. Python and Java may behave differently, and the playground warns about known differences.
-- **SQL formatter:** a simple layout tool, not a full SQL parser.
+Then in VS Code run **Extensions: Install from VSIX...** and pick the file, or from a terminal:
+
+```bash
+code --install-extension sv-devtools-0.1.0.vsix
+```
+
+The extension is not published to the Visual Studio Marketplace yet.
+
+## Notes and limits
+
+- **JWT:** decoding shows the header and payload only. The signature is **not** verified, so do not trust claims on their own.
+- **Regex:** matching always uses the JavaScript engine. Python and Java notes are warnings about known differences, not a different matcher.
+- **SQL formatter:** a layout helper for simple statements, not a full SQL parser.
+- **Diff ignore options:** whitespace and case options apply to the summary and copy actions. The diff view itself follows VS Code's own diff settings.
+- **Large input:** the diff tool refuses more than 5,000 lines per side. The regex tool shows the first 1,000 matches.
 
 ## Development
 
@@ -40,7 +70,7 @@ npm run compile
 npm test
 ```
 
-Build a package with `npm run package`, which creates a `.vsix` file you can install with *Extensions: Install from VSIX*.
+See the [developer guide](docs/developer-guide.md) for the project layout and how to add a tool.
 
 ## License
 
