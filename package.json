@@ -263,6 +263,12 @@
         "args": "text-diff",
         "when": "true"
       }
+    ],
+    "viewsWelcome": [
+      {
+        "view": "devtool.tools",
+        "contents": "Dev Tool is a toolbox for everyday developer tasks: diff, regex, JSON, encoding, generators and references.\n[Search tools](command:devtool.searchTools)\nSelect text in any editor and right-click to use Dev Tool actions on it."
+      }
     ]
   },
   "scripts": {
