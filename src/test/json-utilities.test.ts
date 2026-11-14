@@ -57,3 +57,10 @@ test("escape and unescape round-trip special characters", () => {
   assert.deepEqual(unescapeJsonString(escaped), { ok: true, text: original });
   assert.equal(unescapeJsonString("bad\\x").ok, false);
 });
+
+test("empty input gives the shared message in JSON to CSV and JSONPath", () => {
+  assert.equal(jsonToCsv("").ok, false);
+  assert.equal(jsonPath("  ", "$").ok, false);
+  const r = jsonToCsv("");
+  if (!r.ok) assert.match(r.message, /Nothing to process/);
+});

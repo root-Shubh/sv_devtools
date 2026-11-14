@@ -1,3 +1,4 @@
+import { EMPTY_INPUT_MESSAGE, isBlank } from "./parse";
 // JSON comparison. Pure logic, no VS Code dependency.
 // By default object key order is ignored. Set orderSensitive to compare key order too.
 
@@ -65,6 +66,8 @@ export function compareJsonText(
   b: string,
   options: CompareOptions = {}
 ): { changes?: JsonChange[]; error?: string } {
+  if (isBlank(a)) return { error: "Left side is empty. " + EMPTY_INPUT_MESSAGE };
+  if (isBlank(b)) return { error: "Right side is empty. " + EMPTY_INPUT_MESSAGE };
   let left: unknown;
   let right: unknown;
   try {

@@ -84,3 +84,9 @@ test("SQL INSERT fills missing columns with NULL and validates input", () => {
   assert.equal(sqlInserts("t", "[1]").ok, false);
   assert.equal(sqlInserts("t", "{").ok, false);
 });
+
+test("SQL INSERT with empty input gives the shared message", () => {
+  const r = sqlInserts("t", "");
+  assert.equal(r.ok, false);
+  if (!r.ok) assert.match(r.message, /Nothing to process/);
+});
