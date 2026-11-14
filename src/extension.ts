@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("uuid", async () => (await import("./tools/generators/uuidTool")).tool);
   registerTool("hash", async () => (await import("./tools/generators/hashTool")).tool);
   registerTool("text-utilities", async () => (await import("./tools/text/textUtilsTool")).tool);
+  registerTool("json-to-ts", async () => (await import("./tools/json/toTsTool")).tool);
   context.subscriptions.push(vscode.commands.registerCommand("devtool.jsonFormat", async () => (await import("./tools/json/jsonTool")).run()));
   const regex = () => import("./tools/regex/regexTool");
   context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(async (e) => (await regex()).onDocumentChanged(e)));
