@@ -77,6 +77,18 @@
       {
         "command": "devtool.regexCopy",
         "title": "Dev Tool: Copy Regex"
+      },
+      {
+        "command": "devtool.quickClipboard",
+        "title": "Dev Tool: Quick Diff - Selection vs Clipboard"
+      },
+      {
+        "command": "devtool.quickTwoSelections",
+        "title": "Dev Tool: Quick Diff - Two Selections"
+      },
+      {
+        "command": "devtool.quickFiles",
+        "title": "Dev Tool: Quick Diff - Two Files"
       }
     ],
     "menus": {

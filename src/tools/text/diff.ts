@@ -87,3 +87,28 @@ export function diffSummary(lines: DiffLine[]): { added: number; removed: number
   }
   return { added, removed, equal };
 }
+
+// Unified diff text (like `diff -u`), with context lines around each change block.
+export function unifiedDiff(left: string, right: string, options: DiffOptions = {}, context = 3): string {
+  const lines = diffLines(left, right, options);
+  const changed = lines.map((l, i) => (l.kind !== "equal" ? i : -1)).filter((i) => i >= 0);
+  if (changed.length === 0) return "";
+  const keep = new Set<number>();
+  for (const i of changed) {
+    for (let k = Math.max(0, i - context); k <= Math.min(lines.length - 1, i + context); k++) keep.add(k);
+  }
+  const out: string[] = ["--- left", "+++ right"];
+  let prev = -2;
+  for (let i = 0; i < lines.length; i++) {
+    if (!keep.has(i)) continue;
+    if (i !== prev + 1) {
+      const l = lines[i].leftLine ?? "?";
+      const r = lines[i].rightLine ?? "?";
+      out.push(`@@ -${l} +${r} @@`);
+    }
+    const l = lines[i];
+    out.push((l.kind === "added" ? "+" : l.kind === "removed" ? "-" : " ") + l.text);
+    prev = i;
+  }
+  return out.join("\n");
+}

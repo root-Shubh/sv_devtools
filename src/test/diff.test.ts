@@ -44,3 +44,16 @@ test("oversized input is rejected with a clear error", () => {
   const big = Array.from({ length: 5001 }, (_, i) => String(i)).join("\n");
   assert.throws(() => diffLines(big, "x"), RangeError);
 });
+
+import { unifiedDiff } from "../tools/text/diff";
+
+test("unified diff is empty for identical text", () => {
+  assert.equal(unifiedDiff("a\nb", "a\nb"), "");
+});
+
+test("unified diff shows removed and added lines with markers", () => {
+  const u = unifiedDiff("one\ntwo", "one\n2");
+  assert.ok(u.includes("-two"));
+  assert.ok(u.includes("+2"));
+  assert.ok(u.includes(" one"));
+});
