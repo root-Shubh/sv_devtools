@@ -53,6 +53,22 @@
         "command": "devtool.toggleFavorite",
         "title": "Dev Tool: Toggle Favorite",
         "icon": "$(star-empty)"
+      },
+      {
+        "command": "devtool.diffSwap",
+        "title": "Dev Tool: Swap Diff Sides"
+      },
+      {
+        "command": "devtool.diffClear",
+        "title": "Dev Tool: Clear Diff Inputs"
+      },
+      {
+        "command": "devtool.diffSummary",
+        "title": "Dev Tool: Diff Summary"
+      },
+      {
+        "command": "devtool.diffCopy",
+        "title": "Dev Tool: Copy Differences"
       }
     ],
     "menus": {
