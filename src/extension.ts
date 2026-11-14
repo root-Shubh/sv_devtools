@@ -20,6 +20,7 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("text-utilities", async () => (await import("./tools/text/textUtilsTool")).tool);
   registerTool("json-to-ts", async () => (await import("./tools/json/toTsTool")).tool);
   registerTool("encoding-conversion", async () => (await import("./tools/encoding/conversionTool")).tool);
+  registerTool("timestamps", async () => (await import("./tools/encoding/timestampsTool")).tool);
   registerTool("json-utilities", async () => (await import("./tools/json/utilitiesTool")).tool);
   context.subscriptions.push(vscode.commands.registerCommand("devtool.jsonFormat", async () => (await import("./tools/json/jsonTool")).run()));
   const regex = () => import("./tools/regex/regexTool");
