@@ -3,6 +3,7 @@ import { ToolTreeProvider } from "./views/toolTree";
 import { searchTools } from "./views/searchTools";
 import { TOOLS } from "./tools/registry";
 import { ToolState } from "./state/toolState";
+import { hasTool, loadTool } from "./tools/loader";
 
 export function activate(context: vscode.ExtensionContext): void {
   const state = new ToolState(context.globalState);
