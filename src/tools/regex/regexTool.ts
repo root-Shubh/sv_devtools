@@ -141,4 +141,12 @@ export async function copyRegex(): Promise<void> {
   void vscode.window.showInformationMessage(`Copied ${literal}`);
 }
 
+// Loads a pattern and flags from elsewhere (e.g. the regex library) and opens the playground.
+export async function usePattern(pattern: string, flags: string): Promise<void> {
+  state.pattern = pattern;
+  state.flags = flags;
+  const editor = await ensureDocument(state.doc ? state.doc.getText() : "");
+  highlight(editor);
+}
+
 export const tool = { run };
