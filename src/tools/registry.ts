@@ -46,5 +46,6 @@ export const TOOLS: readonly ToolDefinition[] = [
   { id: "uuid", label: "UUID v4 Generator", category: "generators", description: "Random UUIDs" },
   { id: "generators", label: "Generators", category: "generators", description: "Random strings, passwords, Lorem Ipsum, sample JSON, SQL INSERT" },
   { id: "hash", label: "Hash Generator", category: "generators", description: "MD5, SHA-1, SHA-256, SHA-512" },
+  { id: "developer-utilities", label: "Cron, Permissions, Colour, SQL", category: "developer", description: "Cron helper, Unix permissions, colour converter, SQL formatter" },
   { id: "jwt-decode", label: "JWT Decoder", category: "developer", description: "Decode header and payload (no signature check)" }
 ];

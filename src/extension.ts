@@ -21,6 +21,7 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("json-to-ts", async () => (await import("./tools/json/toTsTool")).tool);
   registerTool("encoding-conversion", async () => (await import("./tools/encoding/conversionTool")).tool);
   registerTool("generators", async () => (await import("./tools/generators/generatorsTool")).tool);
+  registerTool("developer-utilities", async () => (await import("./tools/developer/utilitiesTool")).tool);
   registerTool("jwt-decode", async () => (await import("./tools/developer/jwtTool")).tool);
   registerTool("timestamps", async () => (await import("./tools/encoding/timestampsTool")).tool);
   registerTool("json-utilities", async () => (await import("./tools/json/utilitiesTool")).tool);
