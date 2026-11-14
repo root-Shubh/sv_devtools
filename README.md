@@ -49,7 +49,7 @@ npm run package          # creates sv-devtools-<version>.vsix
 Then in VS Code run **Extensions: Install from VSIX...** and pick the file, or from a terminal:
 
 ```bash
-code --install-extension sv-devtools-0.1.0.vsix
+code --install-extension sv-devtools-1.0.0.vsix
 ```
 
 The extension is not published to the Visual Studio Marketplace yet.
