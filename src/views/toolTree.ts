@@ -28,6 +28,11 @@ export class ToolTreeProvider implements vscode.TreeDataProvider<Node>, vscode.D
     const item = new vscode.TreeItem(node.tool.label, vscode.TreeItemCollapsibleState.None);
     item.description = node.tool.description;
     item.tooltip = node.tool.description;
+    // Screen readers get the name, purpose and favourite state in one phrase.
+    item.accessibilityInformation = {
+      label: `${node.tool.label}. ${node.tool.description}.${favorite ? " Favourite." : ""}`,
+      role: "button"
+    };
     item.contextValue = favorite ? "devtool.tool.favorite" : "devtool.tool";
     item.iconPath = new vscode.ThemeIcon(favorite ? "star-full" : "symbol-misc");
     item.command = {

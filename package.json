@@ -189,6 +189,27 @@
         "key": "ctrl+alt+d",
         "mac": "cmd+alt+d",
         "when": "true"
+      },
+      {
+        "command": "devtool.openTool",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "args": "regex-playground",
+        "when": "true"
+      },
+      {
+        "command": "devtool.openTool",
+        "key": "ctrl+alt+j",
+        "mac": "cmd+alt+j",
+        "args": "json-format",
+        "when": "true"
+      },
+      {
+        "command": "devtool.openTool",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "args": "text-diff",
+        "when": "true"
       }
     ]
   },
