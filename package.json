@@ -69,6 +69,14 @@
       {
         "command": "devtool.diffCopy",
         "title": "Dev Tool: Copy Differences"
+      },
+      {
+        "command": "devtool.regexReplace",
+        "title": "Dev Tool: Regex Replace Preview"
+      },
+      {
+        "command": "devtool.regexCopy",
+        "title": "Dev Tool: Copy Regex"
       }
     ],
     "menus": {
