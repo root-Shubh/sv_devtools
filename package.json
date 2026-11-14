@@ -290,6 +290,26 @@
         "command": "devtool.openWorkbench",
         "title": "Dev Tool: Open Workbench (input and output)",
         "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.file.dataUri",
+        "title": "Dev Tool: Image to Data URI",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.literalJava",
+        "title": "Dev Tool: Java String Literal",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.literalCSharp",
+        "title": "Dev Tool: C# String Literal",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.literalPython",
+        "title": "Dev Tool: Python String Literal",
+        "category": "Dev Tool"
       }
     ],
     "menus": {
@@ -376,6 +396,11 @@
           "command": "devtool.file.jsonFormat",
           "when": "resourceScheme == file && !explorerResourceIsFolder && resourceExtname == .json",
           "group": "1_devtool@5"
+        },
+        {
+          "command": "devtool.file.dataUri",
+          "when": "resourceScheme == file && !explorerResourceIsFolder && resourceExtname =~ /.(png|jpe?g|gif|webp|svg|bmp|ico)$/i",
+          "group": "1_devtool@99"
         }
       ],
       "devtool.editor": [
@@ -508,6 +533,21 @@
           "command": "devtool.ctx.openRegex",
           "when": "editorHasSelection",
           "group": "6_tools@2"
+        },
+        {
+          "command": "devtool.ctx.literalJava",
+          "when": "editorHasSelection",
+          "group": "5_escape@9"
+        },
+        {
+          "command": "devtool.ctx.literalCSharp",
+          "when": "editorHasSelection",
+          "group": "5_escape@10"
+        },
+        {
+          "command": "devtool.ctx.literalPython",
+          "when": "editorHasSelection",
+          "group": "5_escape@11"
         }
       ]
     },

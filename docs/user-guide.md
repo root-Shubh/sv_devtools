@@ -141,6 +141,7 @@ The result lists each change with its path, for example `+ $.user.roles[1]`, `- 
 
 ## Generators
 
+- **ULID:** sortable 26-character IDs (time-ordered, then random). The Generators menu offers it with a count.
 - **UUID v4:** 1 to 100 UUIDs, lowercase or uppercase, with or without dashes. Copied to the clipboard.
 - **Hashes:** MD5, SHA-1, SHA-256 or SHA-512 of the selection, or all four at once. Output is hex over UTF-8 text.
 - **Generators** (one menu):
