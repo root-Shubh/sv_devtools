@@ -2,7 +2,7 @@
   "name": "sv-devtools",
   "displayName": "Dev Tool",
   "description": "A lightweight developer toolbox: text diff, regex, JSON, encoding, generators and developer utilities.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "root-shubh",
   "license": "MIT",
   "icon": "media/icon.png",
@@ -22,6 +22,7 @@
     "vscode": "^1.85.0"
   },
   "categories": [
+    "Formatters",
     "Other"
   ],
   "keywords": [

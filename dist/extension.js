@@ -41,7 +41,12 @@ async function runTransform(label, transform, language = "plaintext") {
   const useSelection = !!editor && !editor.selection.isEmpty;
   const range = editor ? useSelection ? editor.selection : new vscode3.Range(0, 0, editor.document.lineCount, 0) : void 0;
   const input = editor && range ? editor.document.getText(range) : "";
-  const result = transform(input);
+  let result;
+  try {
+    result = transform(input);
+  } catch (err) {
+    result = { ok: false, message: err instanceof Error ? err.message : "Transform failed." };
+  }
   if (!result.ok) {
     void vscode3.window.showErrorMessage(`${label}: ${result.message}`);
     return;
@@ -677,6 +682,18 @@ var init_hash = __esm({
   }
 });
 
+// src/tools/json/parse.ts
+function isBlank(text2) {
+  return text2.trim() === "";
+}
+var EMPTY_INPUT_MESSAGE;
+var init_parse = __esm({
+  "src/tools/json/parse.ts"() {
+    "use strict";
+    EMPTY_INPUT_MESSAGE = "Nothing to process. Select text, or open a document that contains it.";
+  }
+});
+
 // src/tools/json/utilities.ts
 var utilities_exports2 = {};
 __export(utilities_exports2, {
@@ -693,6 +710,7 @@ function csvCell(value) {
   return /[",\r\n]/.test(text2) ? `"${text2.replace(/"/g, '""')}"` : text2;
 }
 function jsonToCsv(json) {
+  if (isBlank(json)) return { ok: false, message: EMPTY_INPUT_MESSAGE };
   let value;
   try {
     value = JSON.parse(json);
@@ -758,6 +776,7 @@ function csvToJson(csv) {
   return { ok: true, text: JSON.stringify(objects, null, 2) };
 }
 function jsonPath(json, path) {
+  if (isBlank(json)) return { ok: false, message: EMPTY_INPUT_MESSAGE };
   let root;
   try {
     root = JSON.parse(json);
@@ -810,6 +829,7 @@ var isObject;
 var init_utilities2 = __esm({
   "src/tools/json/utilities.ts"() {
     "use strict";
+    init_parse();
     isObject = (v) => typeof v === "object" && v !== null && !Array.isArray(v);
   }
 });
@@ -1664,6 +1684,8 @@ function compareJson(a, b, options = {}, path = "$") {
   return changes;
 }
 function compareJsonText(a, b, options = {}) {
+  if (isBlank(a)) return { error: "Left side is empty. " + EMPTY_INPUT_MESSAGE };
+  if (isBlank(b)) return { error: "Right side is empty. " + EMPTY_INPUT_MESSAGE };
   let left2;
   let right2;
   try {
@@ -1681,6 +1703,7 @@ function compareJsonText(a, b, options = {}) {
 var init_compare = __esm({
   "src/tools/json/compare.ts"() {
     "use strict";
+    init_parse();
   }
 });
 
@@ -2144,6 +2167,7 @@ function sampleJson(spec, rows) {
   return { ok: true, text: JSON.stringify(data, null, 2) };
 }
 function sqlInserts(table, json) {
+  if (isBlank(json)) return { ok: false, message: EMPTY_INPUT_MESSAGE };
   if (!/^[A-Za-z_][\w.]*$/.test(table)) return { ok: false, message: "Table name must be a simple identifier." };
   let rows;
   try {
@@ -2174,6 +2198,7 @@ var import_crypto3, pick, CHARSETS, SYMBOLS, LOREM;
 var init_generators = __esm({
   "src/tools/generators/generators.ts"() {
     "use strict";
+    init_parse();
     import_crypto3 = require("crypto");
     pick = (chars) => chars[(0, import_crypto3.randomInt)(chars.length)];
     CHARSETS = {
