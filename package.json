@@ -93,6 +93,41 @@
       {
         "command": "devtool.jsonFormat",
         "title": "Dev Tool: JSON Format / Minify / Validate"
+      },
+      {
+        "command": "devtool.ctx.base64Encode",
+        "title": "Dev Tool: Base64 Encode Selection",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.base64Decode",
+        "title": "Dev Tool: Base64 Decode Selection",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.formatJson",
+        "title": "Dev Tool: Format JSON Selection",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.dedupeLines",
+        "title": "Dev Tool: Remove Duplicate Lines",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.sha256",
+        "title": "Dev Tool: SHA-256 Selection",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.compareWithClipboard",
+        "title": "Dev Tool: Compare Selection with Clipboard",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.openRegex",
+        "title": "Dev Tool: Open Selection in Regex Playground",
+        "category": "Dev Tool"
       }
     ],
     "menus": {
@@ -108,6 +143,43 @@
           "command": "devtool.toggleFavorite",
           "when": "view == devtool.tools && viewItem =~ /devtool.tool/",
           "group": "inline"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "devtool.ctx.base64Encode",
+          "when": "editorHasSelection",
+          "group": "9_devtool@1"
+        },
+        {
+          "command": "devtool.ctx.base64Decode",
+          "when": "editorHasSelection",
+          "group": "9_devtool@2"
+        },
+        {
+          "command": "devtool.ctx.formatJson",
+          "when": "editorHasSelection",
+          "group": "9_devtool@3"
+        },
+        {
+          "command": "devtool.ctx.dedupeLines",
+          "when": "editorHasSelection",
+          "group": "9_devtool@4"
+        },
+        {
+          "command": "devtool.ctx.sha256",
+          "when": "editorHasSelection",
+          "group": "9_devtool@5"
+        },
+        {
+          "command": "devtool.ctx.compareWithClipboard",
+          "when": "editorHasSelection",
+          "group": "9_devtool@6"
+        },
+        {
+          "command": "devtool.ctx.openRegex",
+          "when": "editorHasSelection",
+          "group": "9_devtool@7"
         }
       ]
     },
