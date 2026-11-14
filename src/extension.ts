@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { ToolTreeProvider } from "./views/toolTree";
+import { searchTools } from "./views/searchTools";
 import { TOOLS } from "./tools/registry";
 
 export function activate(context: vscode.ExtensionContext): void {
@@ -9,15 +10,23 @@ export function activate(context: vscode.ExtensionContext): void {
     showCollapseAll: true
   });
 
+  const openTool = (toolId: string) => {
+    const tool = TOOLS.find((t) => t.id === toolId);
+    // Tools are not implemented yet. Later phases load each tool lazily here.
+    void vscode.window.showInformationMessage(
+      tool ? `${tool.label} is not implemented yet.` : `Unknown tool: ${toolId}`
+    );
+  };
+
   context.subscriptions.push(
     tree,
     view,
-    vscode.commands.registerCommand("devtool.openTool", (toolId: string) => {
-      const tool = TOOLS.find((t) => t.id === toolId);
-      // Phase 1: tools are not implemented yet. Later phases load each tool lazily here.
-      void vscode.window.showInformationMessage(
-        tool ? `${tool.label} is not implemented yet.` : `Unknown tool: ${toolId}`
-      );
+    vscode.commands.registerCommand("devtool.openTool", openTool),
+    vscode.commands.registerCommand("devtool.searchTools", async () => {
+      const toolId = await searchTools();
+      if (toolId) {
+        openTool(toolId);
+      }
     })
   );
 }
