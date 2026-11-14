@@ -48,6 +48,11 @@
         "command": "devtool.searchTools",
         "title": "Dev Tool: Search Tools",
         "icon": "$(search)"
+      },
+      {
+        "command": "devtool.toggleFavorite",
+        "title": "Dev Tool: Toggle Favorite",
+        "icon": "$(star-empty)"
       }
     ],
     "menus": {
@@ -56,6 +61,13 @@
           "command": "devtool.searchTools",
           "when": "view == devtool.tools",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "devtool.toggleFavorite",
+          "when": "view == devtool.tools && viewItem =~ /devtool.tool/",
+          "group": "inline"
         }
       ]
     }
