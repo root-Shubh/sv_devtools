@@ -111,6 +111,20 @@ export const contextActions = {
     await runTransform("Unescape JSON string", (x) => m.unescapeJsonString(x));
   },
 
+  // String literals for code
+  literalJava: async () => {
+    const m = await import("../tools/text/codeLiteral");
+    await runTransform("Java string literal", text((x) => m.toStringLiteral(x, "java")));
+  },
+  literalCSharp: async () => {
+    const m = await import("../tools/text/codeLiteral");
+    await runTransform("C# string literal", text((x) => m.toStringLiteral(x, "csharp")));
+  },
+  literalPython: async () => {
+    const m = await import("../tools/text/codeLiteral");
+    await runTransform("Python string literal", text((x) => m.toStringLiteral(x, "python")));
+  },
+
   // Compare and regex
   compareWithClipboard: async () => {
     const quick = await import("../tools/text/quickDiff");

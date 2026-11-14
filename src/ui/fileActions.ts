@@ -69,6 +69,7 @@ export const fileActions = {
     if (r.ok) await show("Format JSON", r.text, "json");
     else void vscode.window.showErrorMessage(r.message);
   },
+  dataUri: dataUri,
   stats: async (uri?: vscode.Uri) => {
     const target = targetOf(uri);
     if (!target) return;
@@ -79,6 +80,21 @@ export const fileActions = {
     await show("File statistics", `File: ${target.fsPath}\nCharacters: ${s.characters}\nWords: ${s.words}\nLines: ${s.lines}`);
   }
 };
+
+// Images are read as bytes (not text), so this does not use readFileText.
+async function dataUri(uri?: vscode.Uri): Promise<void> {
+  const target = targetOf(uri);
+  if (!target) return;
+  const ext = target.fsPath.slice(target.fsPath.lastIndexOf("."));
+  const { mimeForExtension, toDataUri, formatBytes } = await import("../tools/encoding/dataUri");
+  const mime = mimeForExtension(ext);
+  if (!mime) return void vscode.window.showErrorMessage("Not a supported image type (PNG, JPEG, GIF, WebP, SVG, BMP, ICO).");
+  const stat = await fs.stat(target.fsPath);
+  if (stat.size > 2 * 1024 * 1024) return void vscode.window.showErrorMessage(`Image is ${formatBytes(stat.size)}; the limit is 2 MB.`);
+  const r = toDataUri(await fs.readFile(target.fsPath), mime);
+  if (!r.ok) return void vscode.window.showErrorMessage(r.message);
+  await show(`Data URI (${formatBytes(stat.size)})`, r.text);
+}
 
 export function registerFileActions(context: vscode.ExtensionContext): void {
   for (const [name, action] of Object.entries(fileActions)) {

@@ -77,6 +77,13 @@ async function sampleJsonFlow(): Promise<void> {
   await output(r.text, "Sample JSON");
 }
 
+async function ulidFlow(): Promise<void> {
+  const count = await askNumber("How many ULIDs?", "1");
+  if (count === undefined) return;
+  const { generateUlids } = await import("./ulid");
+  await output(generateUlids(count).join("\n"), "ULID");
+}
+
 async function sqlFlow(): Promise<void> {
   const editor = vscode.window.activeTextEditor;
   const source = editor && !editor.selection.isEmpty ? editor.document.getText(editor.selection) : "";
@@ -96,6 +103,7 @@ export async function run(): Promise<void> {
       { label: "Password", run: passwordFlow },
       { label: "Lorem Ipsum", run: loremFlow },
       { label: "Sample JSON", run: sampleJsonFlow },
+      { label: "ULID (sortable unique ID)", run: ulidFlow },
       { label: "SQL INSERT from JSON", run: sqlFlow }
     ],
     { placeHolder: "Generator" }
