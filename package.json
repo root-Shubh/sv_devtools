@@ -70,7 +70,15 @@
           "group": "inline"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "devtool.searchTools",
+        "key": "ctrl+alt+d",
+        "mac": "cmd+alt+d",
+        "when": "true"
+      }
+    ]
   },
   "scripts": {
     "compile": "tsc -p ./",
