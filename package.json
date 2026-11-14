@@ -112,41 +112,6 @@
         "title": "Dev Tool: JSON Format / Minify / Validate"
       },
       {
-        "command": "devtool.ctx.base64Encode",
-        "title": "Dev Tool: Base64 Encode Selection",
-        "category": "Dev Tool"
-      },
-      {
-        "command": "devtool.ctx.base64Decode",
-        "title": "Dev Tool: Base64 Decode Selection",
-        "category": "Dev Tool"
-      },
-      {
-        "command": "devtool.ctx.formatJson",
-        "title": "Dev Tool: Format JSON Selection",
-        "category": "Dev Tool"
-      },
-      {
-        "command": "devtool.ctx.dedupeLines",
-        "title": "Dev Tool: Remove Duplicate Lines",
-        "category": "Dev Tool"
-      },
-      {
-        "command": "devtool.ctx.sha256",
-        "title": "Dev Tool: SHA-256 Selection",
-        "category": "Dev Tool"
-      },
-      {
-        "command": "devtool.ctx.compareWithClipboard",
-        "title": "Dev Tool: Compare Selection with Clipboard",
-        "category": "Dev Tool"
-      },
-      {
-        "command": "devtool.ctx.openRegex",
-        "title": "Dev Tool: Open Selection in Regex Playground",
-        "category": "Dev Tool"
-      },
-      {
         "command": "devtool.showTools",
         "title": "Dev Tool: Show Tools View",
         "category": "Dev Tool"
@@ -195,6 +160,131 @@
         "command": "devtool.file.jsonFormat",
         "title": "Dev Tool: Format JSON File",
         "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.base64Encode",
+        "title": "Dev Tool: Base64 Encode",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.base64Decode",
+        "title": "Dev Tool: Base64 Decode",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.urlEncodeComponent",
+        "title": "Dev Tool: URL Encode",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.urlDecode",
+        "title": "Dev Tool: URL Decode",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.htmlEncode",
+        "title": "Dev Tool: HTML Entities Encode",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.htmlDecode",
+        "title": "Dev Tool: HTML Entities Decode",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.textToHex",
+        "title": "Dev Tool: Text to Hex",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.hexToText",
+        "title": "Dev Tool: Hex to Text",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.formatJson",
+        "title": "Dev Tool: Format JSON",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.minifyJson",
+        "title": "Dev Tool: Minify JSON",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.formatSql",
+        "title": "Dev Tool: Format SQL",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.formatXml",
+        "title": "Dev Tool: Format XML",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.sortLines",
+        "title": "Dev Tool: Sort Lines",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.dedupeLines",
+        "title": "Dev Tool: Remove Duplicate Lines",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.trimLines",
+        "title": "Dev Tool: Trim Lines",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.removeEmptyLines",
+        "title": "Dev Tool: Remove Empty Lines",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.uppercase",
+        "title": "Dev Tool: Uppercase",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.lowercase",
+        "title": "Dev Tool: Lowercase",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.countStats",
+        "title": "Dev Tool: Count Characters, Words and Lines",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.sha256",
+        "title": "Dev Tool: SHA-256",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.md5",
+        "title": "Dev Tool: MD5",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.jsonEscape",
+        "title": "Dev Tool: Escape as JSON String",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.jsonUnescape",
+        "title": "Dev Tool: Unescape JSON String",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.compareWithClipboard",
+        "title": "Dev Tool: Compare with Clipboard",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.ctx.openRegex",
+        "title": "Dev Tool: Open in Regex Playground",
+        "category": "Dev Tool"
       }
     ],
     "menus": {
@@ -214,39 +304,9 @@
       ],
       "editor/context": [
         {
-          "command": "devtool.ctx.base64Encode",
+          "submenu": "devtool.editor",
           "when": "editorHasSelection",
-          "group": "9_devtool@1"
-        },
-        {
-          "command": "devtool.ctx.base64Decode",
-          "when": "editorHasSelection",
-          "group": "9_devtool@2"
-        },
-        {
-          "command": "devtool.ctx.formatJson",
-          "when": "editorHasSelection",
-          "group": "9_devtool@3"
-        },
-        {
-          "command": "devtool.ctx.dedupeLines",
-          "when": "editorHasSelection",
-          "group": "9_devtool@4"
-        },
-        {
-          "command": "devtool.ctx.sha256",
-          "when": "editorHasSelection",
-          "group": "9_devtool@5"
-        },
-        {
-          "command": "devtool.ctx.compareWithClipboard",
-          "when": "editorHasSelection",
-          "group": "9_devtool@6"
-        },
-        {
-          "command": "devtool.ctx.openRegex",
-          "when": "editorHasSelection",
-          "group": "9_devtool@7"
+          "group": "9_devtool"
         }
       ],
       "commandPalette": [
@@ -312,6 +372,133 @@
           "when": "resourceScheme == file && !explorerResourceIsFolder && resourceExtname == .json",
           "group": "1_devtool@5"
         }
+      ],
+      "devtool.editor": [
+        {
+          "command": "devtool.ctx.base64Encode",
+          "when": "editorHasSelection",
+          "group": "1_encode@1"
+        },
+        {
+          "command": "devtool.ctx.base64Decode",
+          "when": "editorHasSelection",
+          "group": "1_encode@2"
+        },
+        {
+          "command": "devtool.ctx.urlEncodeComponent",
+          "when": "editorHasSelection",
+          "group": "1_encode@3"
+        },
+        {
+          "command": "devtool.ctx.urlDecode",
+          "when": "editorHasSelection",
+          "group": "1_encode@4"
+        },
+        {
+          "command": "devtool.ctx.htmlEncode",
+          "when": "editorHasSelection",
+          "group": "1_encode@5"
+        },
+        {
+          "command": "devtool.ctx.htmlDecode",
+          "when": "editorHasSelection",
+          "group": "1_encode@6"
+        },
+        {
+          "command": "devtool.ctx.textToHex",
+          "when": "editorHasSelection",
+          "group": "1_encode@7"
+        },
+        {
+          "command": "devtool.ctx.hexToText",
+          "when": "editorHasSelection",
+          "group": "1_encode@8"
+        },
+        {
+          "command": "devtool.ctx.formatJson",
+          "when": "editorHasSelection",
+          "group": "2_format@1"
+        },
+        {
+          "command": "devtool.ctx.minifyJson",
+          "when": "editorHasSelection",
+          "group": "2_format@2"
+        },
+        {
+          "command": "devtool.ctx.formatSql",
+          "when": "editorHasSelection",
+          "group": "2_format@3"
+        },
+        {
+          "command": "devtool.ctx.formatXml",
+          "when": "editorHasSelection",
+          "group": "2_format@4"
+        },
+        {
+          "command": "devtool.ctx.sortLines",
+          "when": "editorHasSelection",
+          "group": "3_text@1"
+        },
+        {
+          "command": "devtool.ctx.dedupeLines",
+          "when": "editorHasSelection",
+          "group": "3_text@2"
+        },
+        {
+          "command": "devtool.ctx.trimLines",
+          "when": "editorHasSelection",
+          "group": "3_text@3"
+        },
+        {
+          "command": "devtool.ctx.removeEmptyLines",
+          "when": "editorHasSelection",
+          "group": "3_text@4"
+        },
+        {
+          "command": "devtool.ctx.uppercase",
+          "when": "editorHasSelection",
+          "group": "3_text@5"
+        },
+        {
+          "command": "devtool.ctx.lowercase",
+          "when": "editorHasSelection",
+          "group": "3_text@6"
+        },
+        {
+          "command": "devtool.ctx.countStats",
+          "when": "editorHasSelection",
+          "group": "3_text@7"
+        },
+        {
+          "command": "devtool.ctx.sha256",
+          "when": "editorHasSelection",
+          "group": "4_hash@1"
+        },
+        {
+          "command": "devtool.ctx.md5",
+          "when": "editorHasSelection",
+          "group": "4_hash@2"
+        },
+        {
+          "command": "devtool.ctx.jsonEscape",
+          "when": "editorHasSelection",
+          "group": "5_escape@1"
+        },
+        {
+          "command": "devtool.ctx.jsonUnescape",
+          "when": "editorHasSelection",
+          "group": "5_escape@2"
+        },
+        {
+          "command": "devtool.ctx.compareWithClipboard",
+          "when": "editorHasSelection",
+          "group": "6_tools@1"
+        },
+        {
+          "command": "devtool.ctx.openRegex",
+          "when": "editorHasSelection",
+          "group": "6_tools@2"
+        }
       ]
     },
     "keybindings": [
@@ -352,6 +539,10 @@
     "submenus": [
       {
         "id": "devtool.explorer",
+        "label": "Dev Tool"
+      },
+      {
+        "id": "devtool.editor",
         "label": "Dev Tool"
       }
     ]
