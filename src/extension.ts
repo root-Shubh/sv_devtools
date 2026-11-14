@@ -16,6 +16,7 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("base64", async () => (await import("./tools/encoding/base64Tool")).tool);
   registerTool("url-encode", async () => (await import("./tools/encoding/urlTool")).tool);
   registerTool("uuid", async () => (await import("./tools/generators/uuidTool")).tool);
+  registerTool("hash", async () => (await import("./tools/generators/hashTool")).tool);
   context.subscriptions.push(vscode.commands.registerCommand("devtool.jsonFormat", async () => (await import("./tools/json/jsonTool")).run()));
   const regex = () => import("./tools/regex/regexTool");
   context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(async (e) => (await regex()).onDocumentChanged(e)));
