@@ -7,6 +7,11 @@ All notable changes to Dev Tool are listed here. This project follows [Semantic 
 ### Changed
 - Documentation rewritten: README reorganised, new user guide (every tool, shortcuts, menus, limits), developer guide (architecture, adding a tool, testing, CI, packaging) and contributing guide (branch flow, commits, pull requests, Jira).
 
+## [Unreleased]
+
+### Changed
+- Licence changed from MIT to all rights reserved with terms of use. Versions already released under MIT remain MIT for the copies people already have.
+
 ## [1.0.0] - 2026-11-14
 
 First public version. Everything below is available from the Dev Tool sidebar, the Command Palette, keyboard shortcuts, the editor right-click menu, the Explorer right-click menu and the Workbench panel.

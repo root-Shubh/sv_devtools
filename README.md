@@ -78,4 +78,4 @@ See the [developer guide](docs/developer-guide.md) for the project layout and ho
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+All rights reserved. See [LICENSE](LICENSE) for the terms of use.
