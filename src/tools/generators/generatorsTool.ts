@@ -10,7 +10,11 @@ async function output(text: string, label: string): Promise<void> {
 }
 
 async function askNumber(prompt: string, fallback: string): Promise<number | undefined> {
-  const v = await vscode.window.showInputBox({ prompt, value: fallback, validateInput: (x) => (/^\d+$/.test(x) ? undefined : "Enter a whole number") });
+  const v = await vscode.window.showInputBox({
+    prompt,
+    value: fallback,
+    validateInput: (x) => (/^\d+$/.test(x) ? undefined : "Enter a whole number")
+  });
   return v === undefined ? undefined : Number(v);
 }
 
@@ -87,7 +91,9 @@ async function ulidFlow(): Promise<void> {
 async function sqlFlow(): Promise<void> {
   const editor = vscode.window.activeTextEditor;
   const source = editor && !editor.selection.isEmpty ? editor.document.getText(editor.selection) : "";
-  const json = source || (await vscode.window.showInputBox({ prompt: "JSON array of objects (or select it in the editor first)" }));
+  const json =
+    source ||
+    (await vscode.window.showInputBox({ prompt: "JSON array of objects (or select it in the editor first)" }));
   if (!json) return;
   const table = await vscode.window.showInputBox({ prompt: "Table name", value: "my_table" });
   if (!table) return;

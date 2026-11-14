@@ -4,7 +4,14 @@ import { compile, findMatches, replacePreview, portabilityWarnings, validateFlag
 
 test("finds all matches with indexes", () => {
   const r = findMatches({ pattern: "\\d+", flags: "", text: "a1 b22 c333" });
-  assert.deepEqual(r.matches.map((m) => [m.index, m.match]), [[1, "1"], [4, "22"], [8, "333"]]);
+  assert.deepEqual(
+    r.matches.map((m) => [m.index, m.match]),
+    [
+      [1, "1"],
+      [4, "22"],
+      [8, "333"]
+    ]
+  );
 });
 
 test("captured groups are returned per match", () => {
@@ -48,7 +55,10 @@ test("empty text and empty pattern are handled", () => {
 
 test("unicode text matches correctly", () => {
   const r = findMatches({ pattern: "\\p{L}+", flags: "u", text: "café 日本" });
-  assert.deepEqual(r.matches.map((m) => m.match), ["café", "日本"]);
+  assert.deepEqual(
+    r.matches.map((m) => m.match),
+    ["café", "日本"]
+  );
 });
 
 test("replace preview expands numbered and named groups", () => {

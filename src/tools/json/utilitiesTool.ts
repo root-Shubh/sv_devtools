@@ -14,7 +14,10 @@ export async function run(): Promise<void> {
         await runTransform("JSONPath", (x) => jsonPath(x, path), "json");
       }
     },
-    { label: "Escape as JSON string", run: () => runTransform("Escape", (x) => ({ ok: true, text: escapeJsonString(x) })) },
+    {
+      label: "Escape as JSON string",
+      run: () => runTransform("Escape", (x) => ({ ok: true, text: escapeJsonString(x) }))
+    },
     { label: "Unescape JSON string", run: () => runTransform("Unescape", unescapeJsonString) }
   ]);
 }

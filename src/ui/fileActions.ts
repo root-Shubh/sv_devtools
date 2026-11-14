@@ -9,7 +9,9 @@ export const MAX_FILE_BYTES = 5 * 1024 * 1024;
 async function readFileText(uri: vscode.Uri): Promise<string | undefined> {
   const stat = await fs.stat(uri.fsPath);
   if (stat.size > MAX_FILE_BYTES) {
-    void vscode.window.showErrorMessage(`File is larger than 5 MB (${Math.round(stat.size / 1024 / 1024)} MB). Dev Tool does not process it.`);
+    void vscode.window.showErrorMessage(
+      `File is larger than 5 MB (${Math.round(stat.size / 1024 / 1024)} MB). Dev Tool does not process it.`
+    );
     return undefined;
   }
   const text = await fs.readFile(uri.fsPath, "utf8");
@@ -77,7 +79,10 @@ export const fileActions = {
     if (text === undefined) return;
     const { countStats } = await import("../tools/text/textUtils");
     const s = countStats(text);
-    await show("File statistics", `File: ${target.fsPath}\nCharacters: ${s.characters}\nWords: ${s.words}\nLines: ${s.lines}`);
+    await show(
+      "File statistics",
+      `File: ${target.fsPath}\nCharacters: ${s.characters}\nWords: ${s.words}\nLines: ${s.lines}`
+    );
   }
 };
 
@@ -88,9 +93,11 @@ async function dataUri(uri?: vscode.Uri): Promise<void> {
   const ext = target.fsPath.slice(target.fsPath.lastIndexOf("."));
   const { mimeForExtension, toDataUri, formatBytes } = await import("../tools/encoding/dataUri");
   const mime = mimeForExtension(ext);
-  if (!mime) return void vscode.window.showErrorMessage("Not a supported image type (PNG, JPEG, GIF, WebP, SVG, BMP, ICO).");
+  if (!mime)
+    return void vscode.window.showErrorMessage("Not a supported image type (PNG, JPEG, GIF, WebP, SVG, BMP, ICO).");
   const stat = await fs.stat(target.fsPath);
-  if (stat.size > 2 * 1024 * 1024) return void vscode.window.showErrorMessage(`Image is ${formatBytes(stat.size)}; the limit is 2 MB.`);
+  if (stat.size > 2 * 1024 * 1024)
+    return void vscode.window.showErrorMessage(`Image is ${formatBytes(stat.size)}; the limit is 2 MB.`);
   const r = toDataUri(await fs.readFile(target.fsPath), mime);
   if (!r.ok) return void vscode.window.showErrorMessage(r.message);
   await show(`Data URI (${formatBytes(stat.size)})`, r.text);

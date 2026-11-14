@@ -96,7 +96,7 @@ export const LIBRARY: readonly LibraryPattern[] = [
     label: "HTML tag (simple)",
     pattern: "<\\/?[A-Za-z][A-Za-z0-9-]*(\\s[^>]*)?\\/?>",
     flags: "",
-    valid: ["<div>", "</p>", "<br/>", "<a href=\"x\">"],
+    valid: ["<div>", "</p>", "<br/>", '<a href="x">'],
     invalid: ["plain text", "<>", "< div>"]
   },
   {

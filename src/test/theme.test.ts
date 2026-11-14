@@ -15,7 +15,11 @@ function files(dir: string): string[] {
 }
 
 test("UI code contains no fixed colour values", () => {
-  const uiFiles = [...files(path.join(root, "views")), ...files(path.join(root, "ui")), path.join(root, "tools", "regex", "regexTool.ts")];
+  const uiFiles = [
+    ...files(path.join(root, "views")),
+    ...files(path.join(root, "ui")),
+    path.join(root, "tools", "regex", "regexTool.ts")
+  ];
   const fixed = /["'`](#[0-9a-fA-F]{3,8})["'`]|\brgba?\(|\bhsla?\(|\bbackgroundColor:\s*["']/;
   const hits = uiFiles.filter((f) => fixed.test(fs.readFileSync(f, "utf8")));
   assert.deepEqual(hits, []);

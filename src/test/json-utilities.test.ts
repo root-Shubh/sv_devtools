@@ -1,6 +1,13 @@
 import { test } from "node:test";
 import * as assert from "node:assert/strict";
-import { jsonToCsv, csvToJson, parseCsv, jsonPath, escapeJsonString, unescapeJsonString } from "../tools/json/utilities";
+import {
+  jsonToCsv,
+  csvToJson,
+  parseCsv,
+  jsonPath,
+  escapeJsonString,
+  unescapeJsonString
+} from "../tools/json/utilities";
 
 test("JSON array of objects converts to CSV with quoting", () => {
   const r = jsonToCsv('[{"a":"x,y","b":1},{"a":"say \\"hi\\"","c":true}]');
@@ -19,7 +26,10 @@ test("CSV to JSON uses the header row and keeps quoted newlines", () => {
 });
 
 test("CSV parser handles CRLF and empty input", () => {
-  assert.deepEqual(parseCsv("a,b\r\n1,2\r\n"), [["a", "b"], ["1", "2"]]);
+  assert.deepEqual(parseCsv("a,b\r\n1,2\r\n"), [
+    ["a", "b"],
+    ["1", "2"]
+  ]);
   assert.equal(csvToJson("").ok, false);
 });
 

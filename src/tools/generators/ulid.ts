@@ -35,7 +35,11 @@ export function encodeUlid(timeMs: number, random: Uint8Array): string {
   return out;
 }
 
-export function generateUlids(count: number, now = Date.now(), source: (n: number) => Uint8Array = (n) => randomBytes(n)): string[] {
+export function generateUlids(
+  count: number,
+  now = Date.now(),
+  source: (n: number) => Uint8Array = (n) => randomBytes(n)
+): string[] {
   const n = Math.min(100, Math.max(1, Math.floor(count)));
   return Array.from({ length: n }, () => encodeUlid(now, source(10)));
 }

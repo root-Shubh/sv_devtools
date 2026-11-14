@@ -30,9 +30,13 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("jwt-decode", async () => (await import("./tools/developer/jwtTool")).tool);
   registerTool("timestamps", async () => (await import("./tools/encoding/timestampsTool")).tool);
   registerTool("json-utilities", async () => (await import("./tools/json/utilitiesTool")).tool);
-  context.subscriptions.push(vscode.commands.registerCommand("devtool.jsonFormat", async () => (await import("./tools/json/jsonTool")).run()));
+  context.subscriptions.push(
+    vscode.commands.registerCommand("devtool.jsonFormat", async () => (await import("./tools/json/jsonTool")).run())
+  );
   const regex = () => import("./tools/regex/regexTool");
-  context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(async (e) => (await regex()).onDocumentChanged(e)));
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeTextDocument(async (e) => (await regex()).onDocumentChanged(e))
+  );
   const diff = () => import("./tools/text/diffTool");
   const state = new ToolState(context.globalState);
   const tree = new ToolTreeProvider(state);
@@ -101,7 +105,9 @@ export function activate(context: vscode.ExtensionContext): void {
       // Reloading the window restarts every extension, including Dev Tool.
       vscode.commands.executeCommand("workbench.action.reloadWindow")
     ),
-    vscode.commands.registerCommand("devtool.openWorkbench", async () => (await import("./ui/workbench")).openWorkbench(context)),
+    vscode.commands.registerCommand("devtool.openWorkbench", async () =>
+      (await import("./ui/workbench")).openWorkbench(context)
+    ),
     vscode.commands.registerCommand("devtool.version", () =>
       vscode.window.showInformationMessage(`Dev Tool version ${String(context.extension.packageJSON.version)}`)
     )

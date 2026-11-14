@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import * as assert from "node:assert/strict";
+import { createHash } from "crypto";
 import { hashText, hashAll } from "../tools/generators/hash";
 
 // Published test vectors for "abc".
@@ -16,7 +17,6 @@ test("empty input has the known empty-string digest", () => {
 });
 
 test("Unicode is hashed as UTF-8", () => {
-  const { createHash } = require("crypto");
   const utf8Bytes = Buffer.from([0xc3, 0xa9]); // "é" in UTF-8
   assert.equal(hashText("é", "md5"), createHash("md5").update(utf8Bytes).digest("hex"));
 });

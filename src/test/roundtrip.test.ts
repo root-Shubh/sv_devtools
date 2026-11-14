@@ -12,7 +12,16 @@ import { diffLines, diffSummary } from "../tools/text/diff";
 // Random text drawn from ASCII, control characters, Latin, CJK and emoji.
 const POOL = [
   ..."abcXYZ 0123 !@#$%^&*()_+-=[]{};:'\",.<>/?\\|`~",
-  "\n", "\t", "\r", "é", "ß", "日", "本", "🙂", "\u0001", "​"
+  "\n",
+  "\t",
+  "\r",
+  "é",
+  "ß",
+  "日",
+  "本",
+  "🙂",
+  "\u0001",
+  "​"
 ];
 function randomText(maxLen: number): string {
   const n = randomInt(0, maxLen + 1);

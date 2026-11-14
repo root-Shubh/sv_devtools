@@ -3,7 +3,9 @@ import { generateUuids } from "./uuid";
 
 // Generates UUIDs into a new document and copies them to the clipboard on request.
 export async function run(): Promise<void> {
-  const countPick = await vscode.window.showQuickPick(["1", "5", "10", "25", "100"], { placeHolder: "How many UUIDs?" });
+  const countPick = await vscode.window.showQuickPick(["1", "5", "10", "25", "100"], {
+    placeHolder: "How many UUIDs?"
+  });
   if (!countPick) return;
   const format = await vscode.window.showQuickPick(
     ["Lowercase, with dashes", "Uppercase, with dashes", "Lowercase, no dashes"],

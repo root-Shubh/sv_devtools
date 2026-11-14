@@ -75,8 +75,12 @@ export function openWorkbench(context: vscode.ExtensionContext): void {
     initialInput: seed
   });
   panel.webview.onDidReceiveMessage((msg) => void onMessage(msg), undefined, context.subscriptions);
-  panel.onDidDispose(() => {
-    panel = undefined;
-    target = undefined;
-  }, undefined, context.subscriptions);
+  panel.onDidDispose(
+    () => {
+      panel = undefined;
+      target = undefined;
+    },
+    undefined,
+    context.subscriptions
+  );
 }

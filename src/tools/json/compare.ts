@@ -60,7 +60,11 @@ export function compareJson(a: unknown, b: unknown, options: CompareOptions = {}
   return changes;
 }
 
-export function compareJsonText(a: string, b: string, options: CompareOptions = {}): { changes?: JsonChange[]; error?: string } {
+export function compareJsonText(
+  a: string,
+  b: string,
+  options: CompareOptions = {}
+): { changes?: JsonChange[]; error?: string } {
   let left: unknown;
   let right: unknown;
   try {

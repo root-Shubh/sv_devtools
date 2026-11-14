@@ -63,7 +63,10 @@ export function findMatches(req: RegexRequest): { matches: MatchResult[]; error?
   return { matches, truncated: false };
 }
 
-export function replacePreview(req: RegexRequest, replacement: string): { result?: string; count: number; error?: string } {
+export function replacePreview(
+  req: RegexRequest,
+  replacement: string
+): { result?: string; count: number; error?: string } {
   const { regex, error } = compile(req.pattern, req.flags);
   if (!regex) return { count: 0, error };
   let count = 0;
@@ -84,7 +87,7 @@ function expandReplacement(template: string, args: unknown[]): string {
     if (key === "&") return captures[0] ?? "";
     if (key.startsWith("<")) return groups?.[key.slice(1, -1)] ?? "";
     const n = Number(key);
-    return n >= 1 && n < captures.length ? captures[n] ?? "" : token;
+    return n >= 1 && n < captures.length ? (captures[n] ?? "") : token;
   });
 }
 
@@ -97,14 +100,14 @@ export function portabilityWarnings(pattern: string, flags: string, engine: Engi
   if (engine === "java" && flags.includes("u")) {
     warnings.push("The u flag has no direct Java equivalent; Unicode classes behave differently.");
   }
-  if (engine !== "javascript" && /\[pP]\{/.test(pattern)) {
-    warnings.push("\p{...} Unicode properties may not be supported in this engine.");
+  if (engine !== "javascript" && /\\[pP]\{/.test(pattern)) {
+    warnings.push("\\p{...} Unicode properties may not be supported in this engine.");
   }
   if (engine !== "javascript" && /\(\?[=!<]/.test(pattern) && /\(\?<[=!]/.test(pattern)) {
     warnings.push("Lookbehind support and length rules differ between engines.");
   }
-  if (engine !== "javascript" && /\d/.test(pattern) && flags.includes("u")) {
-    warnings.push("\d and \w may match different characters with Unicode handling.");
+  if (engine !== "javascript" && /\\[dw]/.test(pattern) && flags.includes("u")) {
+    warnings.push("\\d and \\w may match different characters with Unicode handling.");
   }
   return warnings;
 }

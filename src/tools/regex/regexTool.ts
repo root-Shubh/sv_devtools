@@ -10,7 +10,7 @@ const matchDecoration = vscode.window.createTextEditorDecorationType({
   borderColor: new vscode.ThemeColor("editor.findMatchBorder")
 });
 
-let state: { pattern: string; flags: string; engine: Engine; doc?: vscode.TextDocument } = {
+const state: { pattern: string; flags: string; engine: Engine; doc?: vscode.TextDocument } = {
   pattern: "",
   flags: "",
   engine: "javascript"
@@ -23,8 +23,8 @@ function highlight(editor: vscode.TextEditor): void {
     editor.setDecorations(matchDecoration, []);
     return;
   }
-  const ranges = matches.map((m) =>
-    new vscode.Range(editor.document.positionAt(m.index), editor.document.positionAt(m.index + m.match.length))
+  const ranges = matches.map(
+    (m) => new vscode.Range(editor.document.positionAt(m.index), editor.document.positionAt(m.index + m.match.length))
   );
   editor.setDecorations(matchDecoration, ranges);
   if (truncated) {
@@ -73,7 +73,7 @@ export async function run(): Promise<void> {
   const pattern = await vscode.window.showInputBox({
     prompt: "Regex pattern (without slashes)",
     value: state.pattern,
-    placeHolder: "e.g. \d{3}-\d{4}"
+    placeHolder: "e.g. \\d{3}-\\d{4}"
   });
   if (pattern === undefined) return;
   state.pattern = pattern;
@@ -90,11 +90,16 @@ export async function run(): Promise<void> {
   highlight(editor);
 
   const warnings = portabilityWarnings(state.pattern, state.flags, state.engine);
-  const { matches, error } = findMatches({ pattern: state.pattern, flags: state.flags, text: editor.document.getText() });
+  const { matches, error } = findMatches({
+    pattern: state.pattern,
+    flags: state.flags,
+    text: editor.document.getText()
+  });
   if (error) {
     void vscode.window.showErrorMessage(`Regex error: ${error}`);
   } else {
-    const groupInfo = matches[0] && matches[0].groups.length > 0 ? ` First match groups: ${JSON.stringify(matches[0].groups)}.` : "";
+    const groupInfo =
+      matches[0] && matches[0].groups.length > 0 ? ` First match groups: ${JSON.stringify(matches[0].groups)}.` : "";
     void vscode.window.showInformationMessage(`${matches.length} match(es).${groupInfo}`);
   }
   if (warnings.length > 0) {

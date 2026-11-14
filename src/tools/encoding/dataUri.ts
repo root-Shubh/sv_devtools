@@ -17,7 +17,10 @@ export function mimeForExtension(ext: string): string | undefined {
   return IMAGE_MIME[ext.toLowerCase()];
 }
 
-export function toDataUri(bytes: Uint8Array, mime: string): { ok: true; text: string } | { ok: false; message: string } {
+export function toDataUri(
+  bytes: Uint8Array,
+  mime: string
+): { ok: true; text: string } | { ok: false; message: string } {
   if (bytes.length > MAX_IMAGE_BYTES) {
     return { ok: false, message: `Image is ${Math.round(bytes.length / 1024)} KB; the limit is 2 MB.` };
   }

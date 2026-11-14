@@ -1,8 +1,6 @@
 // JSON formatting, minifying and validation. Pure logic, no VS Code dependency.
 
-export type JsonResult =
-  | { ok: true; text: string }
-  | { ok: false; message: string; line?: number; column?: number };
+export type JsonResult = { ok: true; text: string } | { ok: false; message: string; line?: number; column?: number };
 
 // Converts a character offset into a 1-based line and column.
 export function positionToLineColumn(text: string, offset: number): { line: number; column: number } {

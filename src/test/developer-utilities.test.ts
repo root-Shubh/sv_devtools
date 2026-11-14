@@ -6,9 +6,15 @@ test("cron: parses lists, ranges and steps and rejects bad fields", () => {
   const ok = d.parseCron("*/15 9-17 * * 1,5");
   assert.ok(ok.ok);
   if (ok.ok) {
-    assert.deepEqual([...ok.value.minute].sort((a, b) => a - b), [0, 15, 30, 45]);
+    assert.deepEqual(
+      [...ok.value.minute].sort((a, b) => a - b),
+      [0, 15, 30, 45]
+    );
     assert.ok(ok.value.hour.has(9) && ok.value.hour.has(17) && !ok.value.hour.has(18));
-    assert.deepEqual([...ok.value.dow].sort((a, b) => a - b), [1, 5]);
+    assert.deepEqual(
+      [...ok.value.dow].sort((a, b) => a - b),
+      [1, 5]
+    );
   }
   assert.equal(d.parseCron("60 * * * *").ok, false);
   assert.equal(d.parseCron("* * * *").ok, false);
@@ -20,7 +26,14 @@ test("cron: next runs are correct and in order (UTC-independent check via local 
   const r = d.nextRuns("0 */2 * * *", from, 3);
   assert.ok(r.ok);
   if (r.ok) {
-    assert.deepEqual(r.runs.map((x) => [x.getHours(), x.getMinutes()]), [[12, 0], [14, 0], [16, 0]]);
+    assert.deepEqual(
+      r.runs.map((x) => [x.getHours(), x.getMinutes()]),
+      [
+        [12, 0],
+        [14, 0],
+        [16, 0]
+      ]
+    );
   }
 });
 
@@ -53,7 +66,7 @@ test("colours convert between HEX, RGB and HSL", () => {
 
 test("SQL formatter puts clauses on their own lines and keeps strings intact", () => {
   const out = d.formatSql("select id, name from users where name = 'select from' and id > 1 order by id");
-  assert.match(out, /^SELECT id, name\nFROM users\nWHERE name = 'select from'\n  AND id > 1\nORDER BY id$/);
+  assert.match(out, /^SELECT id, name\nFROM users\nWHERE name = 'select from'\n {2}AND id > 1\nORDER BY id$/);
 });
 
 test("SQL formatter handles joins", () => {

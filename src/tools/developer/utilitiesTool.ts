@@ -48,7 +48,10 @@ export async function run(): Promise<void> {
     { label: "Cron helper", run: cron },
     { label: "Unix permissions", run: permissions },
     { label: "Colour converter (HEX to RGB/HSL)", run: colour },
-    { label: "SQL formatter", run: () => runTransform("SQL format", (x) => ({ ok: true, text: d.formatSql(x) }), "sql") }
+    {
+      label: "SQL formatter",
+      run: () => runTransform("SQL format", (x) => ({ ok: true, text: d.formatSql(x) }), "sql")
+    }
   ]);
 }
 

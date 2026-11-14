@@ -608,12 +608,20 @@
     "watch": "tsc -watch -p ./",
     "test": "node --test out/test/",
     "package": "vsce package",
-    "check:changelog": "node scripts/check-changelog.js"
+    "check:changelog": "node scripts/check-changelog.js",
+    "lint": "eslint src scripts",
+    "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.js\" package.json",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.js\" package.json",
+    "coverage": "node --test --experimental-test-coverage out/test/"
   },
   "devDependencies": {
+    "@eslint/js": "9.39.5",
     "@types/node": "^20.0.0",
     "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "3.9.1",
+    "eslint": "9.39.5",
+    "prettier": "3.9.10",
     "typescript": "^5.4.0",
-    "@vscode/vsce": "3.9.1"
+    "typescript-eslint": "8.72.1"
   }
 }

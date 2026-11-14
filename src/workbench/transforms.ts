@@ -8,7 +8,14 @@ import { formatJson, minifyJson, validateJson } from "../tools/json/format";
 import { escapeJsonString, unescapeJsonString } from "../tools/json/utilities";
 import { formatSql } from "../tools/developer/utilities";
 import { formatXml as formatXmlStrict } from "../tools/developer/references";
-import { removeDuplicateLines, sortLines, trimLines, reverseLines, removeEmptyLines, countStats } from "../tools/text/textUtils";
+import {
+  removeDuplicateLines,
+  sortLines,
+  trimLines,
+  reverseLines,
+  removeEmptyLines,
+  countStats
+} from "../tools/text/textUtils";
 import { hashText } from "../tools/generators/hash";
 
 export type TransformResult = { ok: true; text: string } | { ok: false; message: string };
@@ -21,7 +28,9 @@ export interface Transform {
   run: (input: string) => TransformResult;
 }
 
-const plain = (fn: (x: string) => string) => (x: string): TransformResult => ({ ok: true, text: fn(x) });
+const plain =
+  (fn: (x: string) => string) =>
+  (x: string): TransformResult => ({ ok: true, text: fn(x) });
 
 export const TRANSFORMS: readonly Transform[] = [
   { id: "base64-encode", label: "Base64 encode", group: "Encode", run: base64Encode },
@@ -35,10 +44,15 @@ export const TRANSFORMS: readonly Transform[] = [
 
   { id: "json-format", label: "JSON format", group: "Format", run: (x) => formatJson(x) },
   { id: "json-minify", label: "JSON minify", group: "Format", run: (x) => minifyJson(x) },
-  { id: "json-validate", label: "JSON validate", group: "Format", run: (x) => {
+  {
+    id: "json-validate",
+    label: "JSON validate",
+    group: "Format",
+    run: (x) => {
       const r = validateJson(x);
       return r.ok ? { ok: true, text: "Valid JSON." } : { ok: false, message: r.message };
-    } },
+    }
+  },
   { id: "sql-format", label: "SQL format", group: "Format", run: plain(formatSql) },
   { id: "xml-format", label: "XML format and validate", group: "Format", run: (x) => formatXmlStrict(x) },
 
@@ -57,10 +71,15 @@ export const TRANSFORMS: readonly Transform[] = [
   { id: "json-escape", label: "Escape as JSON string", group: "Escape", run: plain(escapeJsonString) },
   { id: "json-unescape", label: "Unescape JSON string", group: "Escape", run: (x) => unescapeJsonString(x) },
 
-  { id: "count", label: "Count characters, words and lines", group: "Inspect", run: plain((x) => {
+  {
+    id: "count",
+    label: "Count characters, words and lines",
+    group: "Inspect",
+    run: plain((x) => {
       const s = countStats(x);
       return `Characters: ${s.characters}\nWords: ${s.words}\nLines: ${s.lines}`;
-    }) }
+    })
+  }
 ];
 
 export function findTransform(id: string): Transform | undefined {
@@ -73,7 +92,8 @@ export const MAX_OUTPUT_CHARS = 2_000_000;
 export function runTransform(id: string, input: string): TransformResult {
   const t = findTransform(id);
   if (!t) return { ok: false, message: `Unknown transform: ${id}` };
-  if (input.length > MAX_OUTPUT_CHARS) return { ok: false, message: "Input is too large for the workbench (over 2 million characters)." };
+  if (input.length > MAX_OUTPUT_CHARS)
+    return { ok: false, message: "Input is too large for the workbench (over 2 million characters)." };
   try {
     return t.run(input);
   } catch (err) {
