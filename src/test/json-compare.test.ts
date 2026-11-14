@@ -45,3 +45,8 @@ test("invalid text returns an error on the side that failed", () => {
   const r2 = compareJsonText("{}", "{");
   assert.ok(r2.error && r2.error.startsWith("Right side"));
 });
+
+test("empty side of a JSON comparison is reported by side", () => {
+  const r = compareJsonText("", "{}");
+  assert.ok(r.error && r.error.startsWith("Left side is empty"));
+});

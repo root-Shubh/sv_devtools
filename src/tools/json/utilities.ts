@@ -1,3 +1,4 @@
+import { EMPTY_INPUT_MESSAGE, isBlank } from "./parse";
 // JSON utilities: CSV conversion, JSONPath extraction, string escape/unescape. Pure logic.
 
 type Json = unknown;
@@ -12,6 +13,7 @@ function csvCell(value: Json): string {
 }
 
 export function jsonToCsv(json: string): Result {
+  if (isBlank(json)) return { ok: false, message: EMPTY_INPUT_MESSAGE };
   let value: Json;
   try {
     value = JSON.parse(json);
@@ -83,6 +85,7 @@ export function csvToJson(csv: string): Result {
 
 // Supports $, .key, ["key"], [index] and [*] (wildcard over arrays).
 export function jsonPath(json: string, path: string): Result {
+  if (isBlank(json)) return { ok: false, message: EMPTY_INPUT_MESSAGE };
   let root: Json;
   try {
     root = JSON.parse(json);

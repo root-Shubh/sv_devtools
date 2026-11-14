@@ -1941,6 +1941,9 @@ function unionOf(types) {
   return unique.length === 0 ? "unknown" : unique.join(" | ");
 }
 function jsonToTypeScript(json, rootName = "Root") {
+  if (json.trim() === "") {
+    return { ok: false, message: "Nothing to convert. Select JSON, or open a document that contains JSON." };
+  }
   let value;
   try {
     value = JSON.parse(json);

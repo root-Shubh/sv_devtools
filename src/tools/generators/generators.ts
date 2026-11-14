@@ -1,3 +1,4 @@
+import { EMPTY_INPUT_MESSAGE, isBlank } from "../json/parse";
 // Generators: random strings, passwords, Lorem Ipsum, sample JSON and SQL INSERTs.
 // Random values come from Node's crypto module.
 import { randomInt, randomUUID } from "crypto";
@@ -110,6 +111,7 @@ export function sampleJson(spec: string, rows: number): { ok: true; text: string
 
 // SQL INSERT statements from an array of JSON objects. Strings are quoted and escaped.
 export function sqlInserts(table: string, json: string): { ok: true; text: string } | { ok: false; message: string } {
+  if (isBlank(json)) return { ok: false, message: EMPTY_INPUT_MESSAGE };
   if (!/^[A-Za-z_][\w.]*$/.test(table)) return { ok: false, message: "Table name must be a simple identifier." };
   let rows: unknown;
   try {

@@ -15,7 +15,12 @@ export async function runTransform(label: string, transform: Transform, language
     : undefined;
   const input = editor && range ? editor.document.getText(range) : "";
 
-  const result = transform(input);
+  let result: ReturnType<Transform>;
+  try {
+    result = transform(input);
+  } catch (err) {
+    result = { ok: false, message: err instanceof Error ? err.message : "Transform failed." };
+  }
   if (!result.ok) {
     void vscode.window.showErrorMessage(`${label}: ${result.message}`);
     return;
