@@ -170,6 +170,31 @@
         "command": "devtool.version",
         "title": "Dev Tool: Show Version",
         "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.file.sha256",
+        "title": "Dev Tool: SHA-256 of File",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.file.base64",
+        "title": "Dev Tool: Base64 of File",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.file.stats",
+        "title": "Dev Tool: Line, Word and Character Count",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.file.jsonValidate",
+        "title": "Dev Tool: Validate JSON File",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.file.jsonFormat",
+        "title": "Dev Tool: Format JSON File",
+        "category": "Dev Tool"
       }
     ],
     "menus": {
@@ -232,6 +257,60 @@
         {
           "command": "devtool.toggleFavorite",
           "when": "false"
+        },
+        {
+          "command": "devtool.file.sha256",
+          "when": "false"
+        },
+        {
+          "command": "devtool.file.base64",
+          "when": "false"
+        },
+        {
+          "command": "devtool.file.stats",
+          "when": "false"
+        },
+        {
+          "command": "devtool.file.jsonValidate",
+          "when": "false"
+        },
+        {
+          "command": "devtool.file.jsonFormat",
+          "when": "false"
+        }
+      ],
+      "explorer": [
+        {
+          "submenu": "devtool.explorer",
+          "when": "resourceScheme == file && !explorerResourceIsFolder",
+          "group": "9_devtool"
+        }
+      ],
+      "devtool.explorer": [
+        {
+          "command": "devtool.file.sha256",
+          "when": "resourceScheme == file && !explorerResourceIsFolder",
+          "group": "1_devtool@1"
+        },
+        {
+          "command": "devtool.file.base64",
+          "when": "resourceScheme == file && !explorerResourceIsFolder",
+          "group": "1_devtool@2"
+        },
+        {
+          "command": "devtool.file.stats",
+          "when": "resourceScheme == file && !explorerResourceIsFolder",
+          "group": "1_devtool@3"
+        },
+        {
+          "command": "devtool.file.jsonValidate",
+          "when": "resourceScheme == file && !explorerResourceIsFolder && resourceExtname == .json",
+          "group": "1_devtool@4"
+        },
+        {
+          "command": "devtool.file.jsonFormat",
+          "when": "resourceScheme == file && !explorerResourceIsFolder && resourceExtname == .json",
+          "group": "1_devtool@5"
         }
       ]
     },
@@ -268,6 +347,12 @@
       {
         "view": "devtool.tools",
         "contents": "Dev Tool is a toolbox for everyday developer tasks: diff, regex, JSON, encoding, generators and references.\n[Search tools](command:devtool.searchTools)\nSelect text in any editor and right-click to use Dev Tool actions on it."
+      }
+    ],
+    "submenus": [
+      {
+        "id": "devtool.explorer",
+        "label": "Dev Tool"
       }
     ]
   },

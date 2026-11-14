@@ -24,7 +24,8 @@ test("every contributed command has a non-empty title", () => {
 
 test("every command is registered in code or is a known shell command", () => {
   const registered = new Set([...extensionSource.matchAll(/registerCommand\("([^"]+)"/g)].map((m) => m[1]));
-  const contextCommands = ["devtool.ctx."];
+  // These families are registered in a loop from a template string, so they are matched by prefix.
+  const contextCommands = ["devtool.ctx.", "devtool.file."];
   for (const c of manifest.contributes.commands as { command: string }[]) {
     const ok = registered.has(c.command) || contextCommands.some((p) => c.command.startsWith(p)) || c.command === "devtool.openTool";
     assert.ok(ok, `no handler for ${c.command}`);
