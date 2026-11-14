@@ -7,6 +7,9 @@ import { hasTool, loadTool, registerTool } from "./tools/loader";
 
 export function activate(context: vscode.ExtensionContext): void {
   registerTool("text-diff", async () => (await import("./tools/text/diffTool")).tool);
+  registerTool("regex-playground", async () => (await import("./tools/regex/regexTool")).tool);
+  const regex = () => import("./tools/regex/regexTool");
+  context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(async (e) => (await regex()).onDocumentChanged(e)));
   const diff = () => import("./tools/text/diffTool");
   const state = new ToolState(context.globalState);
   const tree = new ToolTreeProvider(state);
@@ -37,6 +40,8 @@ export function activate(context: vscode.ExtensionContext): void {
         await openTool(toolId);
       }
     }),
+    vscode.commands.registerCommand("devtool.regexReplace", async () => (await regex()).replace()),
+    vscode.commands.registerCommand("devtool.regexCopy", async () => (await regex()).copyRegex()),
     vscode.commands.registerCommand("devtool.diffSwap", async () => (await diff()).swap()),
     vscode.commands.registerCommand("devtool.diffClear", async () => (await diff()).clear()),
     vscode.commands.registerCommand("devtool.diffSummary", async () => (await diff()).summarize()),
