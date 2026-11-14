@@ -160,6 +160,8 @@ Decodes a token from the selection or an input box. The output shows notes, head
 
 Notes flag expired tokens, tokens not yet valid, and tokens with `alg: none`.
 
+To check the signature, choose *Verify with a secret (HMAC)* and type the secret. It works for HS256, HS384 and HS512 only. The secret is used for that one check and is not saved. RSA and ECDSA tokens need their public key, which this tool does not support.
+
 ### Developer Utilities (menu)
 
 - **Cron helper:** enter a 5-field expression. Shows a plain-English summary and the next five run times in local time. Supports `*`, lists, ranges and steps. Day-of-month and day-of-week combine with OR when both are set, as in standard cron.
