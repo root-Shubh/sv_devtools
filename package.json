@@ -145,6 +145,31 @@
         "command": "devtool.ctx.openRegex",
         "title": "Dev Tool: Open Selection in Regex Playground",
         "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.showTools",
+        "title": "Dev Tool: Show Tools View",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.refreshTools",
+        "title": "Dev Tool: Refresh Tools View",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.clearState",
+        "title": "Dev Tool: Clear Favourites and Recently Used",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.reloadWindow",
+        "title": "Dev Tool: Reload Window (restart extensions)",
+        "category": "Dev Tool"
+      },
+      {
+        "command": "devtool.version",
+        "title": "Dev Tool: Show Version",
+        "category": "Dev Tool"
       }
     ],
     "menus": {
@@ -197,6 +222,16 @@
           "command": "devtool.ctx.openRegex",
           "when": "editorHasSelection",
           "group": "9_devtool@7"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "devtool.openTool",
+          "when": "false"
+        },
+        {
+          "command": "devtool.toggleFavorite",
+          "when": "false"
         }
       ]
     },

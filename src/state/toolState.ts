@@ -33,6 +33,12 @@ export class ToolState {
     return this.store.get<string[]>(RECENT_KEY, []);
   }
 
+  // Clears favourites and recent tools. Used by the "Clear Favourites and Recent Tools" command.
+  async reset(): Promise<void> {
+    await this.store.update(FAVORITES_KEY, []);
+    await this.store.update(RECENT_KEY, []);
+  }
+
   markUsed(toolId: string): PromiseLike<void> {
     const next = [toolId, ...this.getRecent().filter((id) => id !== toolId)].slice(0, MAX_RECENT);
     return this.store.update(RECENT_KEY, next);
