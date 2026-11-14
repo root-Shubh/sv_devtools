@@ -89,6 +89,10 @@
       {
         "command": "devtool.quickFiles",
         "title": "Dev Tool: Quick Diff - Two Files"
+      },
+      {
+        "command": "devtool.jsonFormat",
+        "title": "Dev Tool: JSON Format / Minify / Validate"
       }
     ],
     "menus": {
