@@ -37,7 +37,7 @@ test("text to hex and back, with Unicode", () => {
 test("hex input is validated", () => {
   assert.equal(c.hexToText("abc").ok, false);
   assert.equal(c.hexToText("zz").ok, false);
-  assert.equal(c.hexToText("").ok, false);
+  assert.deepEqual(c.hexToText(""), { ok: true, text: "" });
   assert.equal(c.hexToText("ff").ok, false, "0xFF is not valid UTF-8");
 });
 
