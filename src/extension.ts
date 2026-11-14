@@ -85,7 +85,23 @@ export function activate(context: vscode.ExtensionContext): void {
         await state.toggleFavorite(toolId);
         tree.refresh();
       }
-    })
+    }),
+    vscode.commands.registerCommand("devtool.showTools", () =>
+      vscode.commands.executeCommand("workbench.view.extension.devtool")
+    ),
+    vscode.commands.registerCommand("devtool.refreshTools", () => tree.refresh()),
+    vscode.commands.registerCommand("devtool.clearState", async () => {
+      await state.reset();
+      tree.refresh();
+      void vscode.window.showInformationMessage("Dev Tool: favourites and recently used tools cleared.");
+    }),
+    vscode.commands.registerCommand("devtool.reloadWindow", () =>
+      // Reloading the window restarts every extension, including Dev Tool.
+      vscode.commands.executeCommand("workbench.action.reloadWindow")
+    ),
+    vscode.commands.registerCommand("devtool.version", () =>
+      vscode.window.showInformationMessage(`Dev Tool version ${String(context.extension.packageJSON.version)}`)
+    )
   );
 }
 
