@@ -47,3 +47,9 @@ test("root array of objects produces an array type", () => {
 test("invalid JSON reports an error", () => {
   assert.equal(jsonToTypeScript("{").ok, false);
 });
+
+test("empty input gives a clear message, not a parser error", () => {
+  const r = jsonToTypeScript("   ");
+  assert.equal(r.ok, false);
+  if (!r.ok) assert.match(r.message, /Nothing to convert/);
+});

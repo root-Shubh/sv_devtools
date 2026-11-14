@@ -88,6 +88,9 @@ export function jsonToTypeScript(
   json: string,
   rootName = "Root"
 ): { ok: true; text: string } | { ok: false; message: string } {
+  if (json.trim() === "") {
+    return { ok: false, message: "Nothing to convert. Select JSON, or open a document that contains JSON." };
+  }
   let value: Json;
   try {
     value = JSON.parse(json);
