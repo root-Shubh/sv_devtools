@@ -44,6 +44,7 @@ export const TOOLS: readonly ToolDefinition[] = [
   { id: "encoding-conversion", label: "Encoding & Conversion", category: "encoding", description: "HTML entities, Unicode, hex, binary, string escapes" },
   { id: "timestamps", label: "Timestamp Converter", category: "encoding", description: "Unix time and dates" },
   { id: "uuid", label: "UUID v4 Generator", category: "generators", description: "Random UUIDs" },
+  { id: "generators", label: "Generators", category: "generators", description: "Random strings, passwords, Lorem Ipsum, sample JSON, SQL INSERT" },
   { id: "hash", label: "Hash Generator", category: "generators", description: "MD5, SHA-1, SHA-256, SHA-512" },
   { id: "jwt-decode", label: "JWT Decoder", category: "developer", description: "Decode header and payload (no signature check)" }
 ];
