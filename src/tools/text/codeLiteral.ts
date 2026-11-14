@@ -10,11 +10,21 @@ export function toStringLiteral(text: string, lang: LiteralLanguage): string {
   for (const ch of text) {
     const cp = ch.codePointAt(0) ?? 0;
     switch (ch) {
-      case "\\": out += "\\\\"; break;
-      case '"': out += '\\"'; break;
-      case "\n": out += "\\n"; break;
-      case "\r": out += "\\r"; break;
-      case "\t": out += "\\t"; break;
+      case "\\":
+        out += "\\\\";
+        break;
+      case '"':
+        out += '\\"';
+        break;
+      case "\n":
+        out += "\\n";
+        break;
+      case "\r":
+        out += "\\r";
+        break;
+      case "\t":
+        out += "\\t";
+        break;
       default:
         if (cp < 0x20 || cp === 0x7f) {
           out += "\\u" + cp.toString(16).padStart(4, "0");

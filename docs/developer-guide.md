@@ -14,6 +14,9 @@ This guide covers how Dev Tool is organised, how to add a tool, how to test and 
 npm install          # install dev dependencies (exact lockfile versions)
 npm run compile      # TypeScript build into out/
 npm test             # run the unit tests with node:test (out/test/*.test.js)
+npm run lint         # ESLint (TypeScript rules) over src and scripts
+npm run format:check # Prettier check (use npm run format to fix)
+npm run coverage     # tests with a line, branch and function coverage report
 npm run package      # build sv-devtools-<version>.vsix with vsce (pinned 3.9.1)
 ```
 

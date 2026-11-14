@@ -6,7 +6,8 @@
 export type XmlResult = { ok: true; text: string } | { ok: false; message: string };
 
 // Tokens: tags (open, close, self-closing), declarations/comments/PIs, and text.
-const TOKEN = /<!--[\s\S]*?-->|<\?[\s\S]*?\?>|<![\s\S]*?>|<\/\s*[A-Za-z_][\w.\-:]*\s*>|<[A-Za-z_][\w.\-:]*(?:\s[^<>]*)?\/?>|[^<]+|</g;
+const TOKEN =
+  /<!--[\s\S]*?-->|<\?[\s\S]*?\?>|<![\s\S]*?>|<\/\s*[A-Za-z_][\w.\-:]*\s*>|<[A-Za-z_][\w.\-:]*(?:\s[^<>]*)?\/?>|[^<]+|</g;
 
 export function formatXml(xml: string, indent = "  "): XmlResult {
   const tokens = xml.match(TOKEN) ?? [];
@@ -22,7 +23,8 @@ export function formatXml(xml: string, indent = "  "): XmlResult {
     if (token.startsWith("</")) {
       const name = token.slice(2, -1).trim();
       const open = stack.pop();
-      if (open !== name) return { ok: false, message: `Mismatched closing tag </${name}>${open ? ` (expected </${open}>)` : ""}.` };
+      if (open !== name)
+        return { ok: false, message: `Mismatched closing tag </${name}>${open ? ` (expected </${open}>)` : ""}.` };
       depth--;
       lines.push(indent.repeat(depth) + token);
     } else if (token.startsWith("<") && !token.startsWith("<!") && !token.startsWith("<?") && !token.endsWith("/>")) {
@@ -53,7 +55,9 @@ export function visualiseEscapes(text: string): string {
   for (const ch of text) {
     const cp = ch.codePointAt(0) ?? 0;
     const label = named[ch] ?? (cp < 0x20 || cp === 0x7f ? "control" : ch);
-    rows.push(`${JSON.stringify(ch).slice(1, -1).padEnd(8)} U+${cp.toString(16).toUpperCase().padStart(4, "0")}  ${label}`);
+    rows.push(
+      `${JSON.stringify(ch).slice(1, -1).padEnd(8)} U+${cp.toString(16).toUpperCase().padStart(4, "0")}  ${label}`
+    );
   }
   return rows.length ? rows.join("\n") : "(empty)";
 }

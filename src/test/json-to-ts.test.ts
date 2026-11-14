@@ -17,7 +17,7 @@ test("primitive fields map to TypeScript types", () => {
 
 test("nested objects get their own interface", () => {
   const out = ts('{"user":{"id":1}}');
-  assert.match(out, /export interface User \{\n  id: number;\n\}/);
+  assert.match(out, /export interface User \{\n {2}id: number;\n\}/);
   assert.match(out, /user: User;/);
 });
 

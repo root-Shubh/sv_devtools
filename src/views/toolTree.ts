@@ -37,7 +37,9 @@ export class ToolTreeProvider implements vscode.TreeDataProvider<Node>, vscode.D
     item.iconPath = new vscode.ThemeIcon(TOOL_ICONS[node.tool.id] ?? "symbol-misc");
     const tip = new vscode.MarkdownString(undefined, true);
     tip.appendMarkdown(`**${node.tool.label}**\n\n${node.tool.description}\n\n`);
-    tip.appendMarkdown(favorite ? "★ Favourite. Use *Toggle Favorite* to remove.\n\n" : "Click to open. Use the star to pin it.");
+    tip.appendMarkdown(
+      favorite ? "★ Favourite. Use *Toggle Favorite* to remove.\n\n" : "Click to open. Use the star to pin it."
+    );
     item.tooltip = tip;
     // Screen readers get the name, purpose and favourite state in one phrase.
     item.accessibilityInformation = {
@@ -87,8 +89,6 @@ export class ToolTreeProvider implements vscode.TreeDataProvider<Node>, vscode.D
   }
 
   private toolsFor(ids: string[]): ToolDefinition[] {
-    return ids
-      .map((id) => TOOLS.find((t) => t.id === id))
-      .filter((t): t is ToolDefinition => t !== undefined);
+    return ids.map((id) => TOOLS.find((t) => t.id === id)).filter((t): t is ToolDefinition => t !== undefined);
   }
 }

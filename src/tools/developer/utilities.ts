@@ -70,7 +70,11 @@ function dayMatches(spec: CronSpec, d: Date): boolean {
   return domOk || dowOk;
 }
 
-export function nextRuns(expr: string, from: Date, count: number): { ok: true; runs: Date[] } | { ok: false; message: string } {
+export function nextRuns(
+  expr: string,
+  from: Date,
+  count: number
+): { ok: true; runs: Date[] } | { ok: false; message: string } {
   const parsed = parseCron(expr);
   if (!parsed.ok) return parsed;
   const spec = parsed.value;
@@ -81,7 +85,12 @@ export function nextRuns(expr: string, from: Date, count: number): { ok: true; r
   // Search up to about four years of minutes; stop early once enough runs are found.
   const limit = 4 * 366 * 24 * 60;
   for (let i = 0; i < limit && runs.length < count; i++) {
-    if (spec.month.has(t.getMonth() + 1) && dayMatches(spec, t) && spec.hour.has(t.getHours()) && spec.minute.has(t.getMinutes())) {
+    if (
+      spec.month.has(t.getMonth() + 1) &&
+      dayMatches(spec, t) &&
+      spec.hour.has(t.getHours()) &&
+      spec.minute.has(t.getMinutes())
+    ) {
       runs.push(new Date(t.getTime()));
     }
     t.setMinutes(t.getMinutes() + 1);
@@ -94,15 +103,23 @@ export function describeCron(expr: string): string {
   const parts = expr.trim().split(/\s+/);
   if (parts.length !== 5) return "";
   const [m, h, dom, mon, dow] = parts;
-  const time = m === "*" && h === "*" ? "Every minute" : m === "0" && h === "*" ? "At the start of every hour" : `At minute ${m} past hour ${h}`;
-  const day = dom === "*" && dow === "*" ? "every day" : dom !== "*" ? `on day ${dom} of the month` : `on weekday(s) ${dow}`;
+  const time =
+    m === "*" && h === "*"
+      ? "Every minute"
+      : m === "0" && h === "*"
+        ? "At the start of every hour"
+        : `At minute ${m} past hour ${h}`;
+  const day =
+    dom === "*" && dow === "*" ? "every day" : dom !== "*" ? `on day ${dom} of the month` : `on weekday(s) ${dow}`;
   const month = mon === "*" ? "" : ` in month(s) ${mon}`;
   return `${time}, ${day}${month}.`;
 }
 
 // ---------- Unix permissions ----------
 
-export function permsFromOctal(octal: string): { ok: true; text: string; symbolic: string } | { ok: false; message: string } {
+export function permsFromOctal(
+  octal: string
+): { ok: true; text: string; symbolic: string } | { ok: false; message: string } {
   if (!/^[0-7]{3,4}$/.test(octal)) return { ok: false, message: "Octal mode must be 3 or 4 digits (0-7)." };
   const digits = octal.slice(-3).split("").map(Number);
   const sym = (d: number) => (d & 4 ? "r" : "-") + (d & 2 ? "w" : "-") + (d & 1 ? "x" : "-");
@@ -123,13 +140,23 @@ export function hexToRgb(hex: string): { r: number; g: number; b: number } | und
   const m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(hex.trim());
   if (!m) return undefined;
   let h = m[1];
-  if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+  if (h.length === 3)
+    h = h
+      .split("")
+      .map((c) => c + c)
+      .join("");
   const n = parseInt(h, 16);
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 
 export function rgbToHex(r: number, g: number, b: number): string {
-  return "#" + [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("").toUpperCase();
+  return (
+    "#" +
+    [r, g, b]
+      .map((v) => Math.round(v).toString(16).padStart(2, "0"))
+      .join("")
+      .toUpperCase()
+  );
 }
 
 export function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
@@ -154,7 +181,20 @@ export function rgbToHsl(r: number, g: number, b: number): { h: number; s: numbe
 
 // ---------- SQL formatting (basic: keywords upper-cased, clause per line) ----------
 
-const CLAUSES = ["SELECT", "FROM", "WHERE", "GROUP BY", "ORDER BY", "HAVING", "LIMIT", "INSERT INTO", "VALUES", "UPDATE", "SET", "DELETE FROM"];
+const CLAUSES = [
+  "SELECT",
+  "FROM",
+  "WHERE",
+  "GROUP BY",
+  "ORDER BY",
+  "HAVING",
+  "LIMIT",
+  "INSERT INTO",
+  "VALUES",
+  "UPDATE",
+  "SET",
+  "DELETE FROM"
+];
 const JOINS = ["LEFT JOIN", "RIGHT JOIN", "INNER JOIN", "FULL JOIN", "JOIN"];
 
 // Splits on keywords outside string literals. Not a full SQL parser: intended for simple statements.
@@ -172,7 +212,12 @@ export function formatSql(sql: string): string {
       continue;
     }
     if (!inString) {
-      const hit = keywords.find((k) => sql.substr(i, k.length).toUpperCase() === k && (i === 0 || !/\w/.test(sql[i - 1])) && !/\w/.test(sql[i + k.length] ?? ""));
+      const hit = keywords.find(
+        (k) =>
+          sql.substr(i, k.length).toUpperCase() === k &&
+          (i === 0 || !/\w/.test(sql[i - 1])) &&
+          !/\w/.test(sql[i + k.length] ?? "")
+      );
       if (hit) {
         const trimmed = out.replace(/\s+$/, "");
         const indent = hit === "AND" || hit === "OR" || hit === "ON" ? "  " : "";
@@ -185,5 +230,8 @@ export function formatSql(sql: string): string {
     out += ch;
     i++;
   }
-  return out.replace(/[ \t]+,/g, ",").replace(/^\n/, "").replace(/[ \t]+\n/g, "\n");
+  return out
+    .replace(/[ \t]+,/g, ",")
+    .replace(/^\n/, "")
+    .replace(/[ \t]+\n/g, "\n");
 }

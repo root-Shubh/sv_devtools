@@ -5,7 +5,8 @@ import { decodeJwt, claimDates } from "./jwt";
 export async function run(): Promise<void> {
   const editor = vscode.window.activeTextEditor;
   const selected = editor && !editor.selection.isEmpty ? editor.document.getText(editor.selection) : "";
-  const token = selected || (await vscode.window.showInputBox({ prompt: "Paste a JWT (decoded locally, signature not verified)" }));
+  const token =
+    selected || (await vscode.window.showInputBox({ prompt: "Paste a JWT (decoded locally, signature not verified)" }));
   if (!token) return;
 
   const r = decodeJwt(token);

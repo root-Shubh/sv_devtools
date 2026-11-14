@@ -1,6 +1,13 @@
 import { test } from "node:test";
 import * as assert from "node:assert/strict";
-import { randomString, generatePassword, loremIpsum, sampleJson, sqlInserts, CHARSETS } from "../tools/generators/generators";
+import {
+  randomString,
+  generatePassword,
+  loremIpsum,
+  sampleJson,
+  sqlInserts,
+  CHARSETS
+} from "../tools/generators/generators";
 
 test("random string uses only the charset and the requested length", () => {
   const s = randomString(64, CHARSETS.hex);

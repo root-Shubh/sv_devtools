@@ -35,7 +35,9 @@ export async function run(): Promise<void> {
     return;
   }
 
-  const input = await inputOrSelection(pick.id === "toDate" ? "Unix seconds or milliseconds" : "Date (ISO 8601 recommended)");
+  const input = await inputOrSelection(
+    pick.id === "toDate" ? "Unix seconds or milliseconds" : "Date (ISO 8601 recommended)"
+  );
   if (input === undefined) return;
 
   if (pick.id === "toDate") {

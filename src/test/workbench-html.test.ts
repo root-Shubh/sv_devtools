@@ -39,7 +39,7 @@ test("colours come from theme variables, not fixed values", () => {
 });
 
 test("input that looks like markup cannot close the script block", () => {
-  const html = page('</script><img src=x onerror=alert(1)>');
+  const html = page("</script><img src=x onerror=alert(1)>");
   assert.equal([...html.matchAll(/<\/script>/g)].length, 1);
   assert.ok(!html.includes("<img src=x"));
 });

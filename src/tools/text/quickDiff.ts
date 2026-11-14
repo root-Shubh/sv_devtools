@@ -26,7 +26,9 @@ export async function twoSelections(): Promise<void> {
   }
   if (firstSelection === undefined) {
     firstSelection = selected;
-    void vscode.window.showInformationMessage("First selection saved. Select the second block and run Quick Diff again.");
+    void vscode.window.showInformationMessage(
+      "First selection saved. Select the second block and run Quick Diff again."
+    );
     return;
   }
   const first = firstSelection;
@@ -35,8 +37,7 @@ export async function twoSelections(): Promise<void> {
 }
 
 export async function twoFiles(): Promise<void> {
-  const pick = () =>
-    vscode.window.showOpenDialog({ canSelectMany: false, openLabel: "Select file" });
+  const pick = () => vscode.window.showOpenDialog({ canSelectMany: false, openLabel: "Select file" });
   const a = await pick();
   if (!a?.[0]) return;
   const b = await pick();

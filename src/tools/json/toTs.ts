@@ -84,7 +84,10 @@ class Gen {
   }
 }
 
-export function jsonToTypeScript(json: string, rootName = "Root"): { ok: true; text: string } | { ok: false; message: string } {
+export function jsonToTypeScript(
+  json: string,
+  rootName = "Root"
+): { ok: true; text: string } | { ok: false; message: string } {
   let value: Json;
   try {
     value = JSON.parse(json);

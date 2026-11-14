@@ -67,7 +67,10 @@ export const contextActions = {
   // Text
   sortLines: async () => {
     const m = await import("../tools/text/textUtils");
-    await runTransform("Sort lines", text((x) => m.sortLines(x)));
+    await runTransform(
+      "Sort lines",
+      text((x) => m.sortLines(x))
+    );
   },
   dedupeLines: async () => {
     const m = await import("../tools/text/textUtils");
@@ -88,7 +91,9 @@ export const contextActions = {
     const selected = editor && !editor.selection.isEmpty ? editor.document.getText(editor.selection) : "";
     const m = await import("../tools/text/textUtils");
     const s = m.countStats(selected);
-    void vscode.window.showInformationMessage(`Selection: ${s.characters} characters, ${s.words} words, ${s.lines} lines.`);
+    void vscode.window.showInformationMessage(
+      `Selection: ${s.characters} characters, ${s.words} words, ${s.lines} lines.`
+    );
   },
 
   // Hashes
@@ -114,15 +119,24 @@ export const contextActions = {
   // String literals for code
   literalJava: async () => {
     const m = await import("../tools/text/codeLiteral");
-    await runTransform("Java string literal", text((x) => m.toStringLiteral(x, "java")));
+    await runTransform(
+      "Java string literal",
+      text((x) => m.toStringLiteral(x, "java"))
+    );
   },
   literalCSharp: async () => {
     const m = await import("../tools/text/codeLiteral");
-    await runTransform("C# string literal", text((x) => m.toStringLiteral(x, "csharp")));
+    await runTransform(
+      "C# string literal",
+      text((x) => m.toStringLiteral(x, "csharp"))
+    );
   },
   literalPython: async () => {
     const m = await import("../tools/text/codeLiteral");
-    await runTransform("Python string literal", text((x) => m.toStringLiteral(x, "python")));
+    await runTransform(
+      "Python string literal",
+      text((x) => m.toStringLiteral(x, "python"))
+    );
   },
 
   // Compare and regex

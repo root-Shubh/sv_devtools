@@ -26,8 +26,8 @@ test("count is clamped to the allowed range", () => {
 });
 
 test("injected source is used, lowercased", () => {
-  assert.deepEqual(generateUuids({ count: 2 }, () => "ABCDEF01-2345-4678-9abc-def012345678"), [
-    "abcdef01-2345-4678-9abc-def012345678",
-    "abcdef01-2345-4678-9abc-def012345678"
-  ]);
+  assert.deepEqual(
+    generateUuids({ count: 2 }, () => "ABCDEF01-2345-4678-9abc-def012345678"),
+    ["abcdef01-2345-4678-9abc-def012345678", "abcdef01-2345-4678-9abc-def012345678"]
+  );
 });

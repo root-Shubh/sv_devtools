@@ -19,8 +19,14 @@ function decodeSegment(segment: string): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
-export function decodeJwt(token: string, now: Date = new Date()): { ok: true; value: DecodedJwt } | { ok: false; message: string } {
-  const parts = token.trim().replace(/^Bearer\s+/i, "").split(".");
+export function decodeJwt(
+  token: string,
+  now: Date = new Date()
+): { ok: true; value: DecodedJwt } | { ok: false; message: string } {
+  const parts = token
+    .trim()
+    .replace(/^Bearer\s+/i, "")
+    .split(".");
   if (parts.length !== 3) return { ok: false, message: "A JWT has three dot-separated parts." };
   try {
     const header = decodeSegment(parts[0]);

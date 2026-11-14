@@ -17,7 +17,8 @@ export function timestampToDate(input: string): TsResult<{ date: Date; unit: "se
 
 export function dateToTimestamp(input: string): TsResult<{ seconds: number; milliseconds: number }> {
   const ms = Date.parse(input.trim());
-  if (Number.isNaN(ms)) return { ok: false, message: "Could not parse that date. Try ISO 8601, e.g. 2026-11-14T10:30:00Z." };
+  if (Number.isNaN(ms))
+    return { ok: false, message: "Could not parse that date. Try ISO 8601, e.g. 2026-11-14T10:30:00Z." };
   return { ok: true, value: { seconds: Math.floor(ms / 1000), milliseconds: ms } };
 }
 

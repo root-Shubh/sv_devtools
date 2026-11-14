@@ -23,9 +23,7 @@ export class ToolState {
 
   toggleFavorite(toolId: string): PromiseLike<void> {
     const current = this.getFavorites();
-    const next = current.includes(toolId)
-      ? current.filter((id) => id !== toolId)
-      : [...current, toolId];
+    const next = current.includes(toolId) ? current.filter((id) => id !== toolId) : [...current, toolId];
     return this.store.update(FAVORITES_KEY, next);
   }
 

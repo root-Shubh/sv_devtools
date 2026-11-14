@@ -72,10 +72,14 @@ export type FieldType = "int" | "float" | "string" | "bool" | "date" | "uuid";
 
 // Spec like "id:int, name:string, active:bool". Returns an array of sample objects.
 export function sampleJson(spec: string, rows: number): { ok: true; text: string } | { ok: false; message: string } {
-  const fields = spec.split(",").map((s) => s.trim()).filter(Boolean).map((s) => {
-    const [name, type = "string"] = s.split(":").map((x) => x.trim());
-    return { name, type: type as FieldType };
-  });
+  const fields = spec
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => {
+      const [name, type = "string"] = s.split(":").map((x) => x.trim());
+      return { name, type: type as FieldType };
+    });
   const valid: FieldType[] = ["int", "float", "string", "bool", "date", "uuid"];
   if (fields.length === 0) return { ok: false, message: "Describe at least one field, e.g. id:int, name:string." };
   const bad = fields.find((f) => !valid.includes(f.type) || !/^[A-Za-z_][\w]*$/.test(f.name));
@@ -83,16 +87,24 @@ export function sampleJson(spec: string, rows: number): { ok: true; text: string
 
   const make = (type: FieldType, i: number): unknown => {
     switch (type) {
-      case "int": return randomInt(0, 10000);
-      case "float": return Number((randomInt(0, 100000) / 100).toFixed(2));
-      case "bool": return randomInt(2) === 1;
-      case "date": return new Date(Date.UTC(2020, 0, 1) + randomInt(0, 1500) * 86400000).toISOString().slice(0, 10);
-      case "uuid": return randomUUID();
-      default: return randomString(8, CHARSETS.alpha) + i;
+      case "int":
+        return randomInt(0, 10000);
+      case "float":
+        return Number((randomInt(0, 100000) / 100).toFixed(2));
+      case "bool":
+        return randomInt(2) === 1;
+      case "date":
+        return new Date(Date.UTC(2020, 0, 1) + randomInt(0, 1500) * 86400000).toISOString().slice(0, 10);
+      case "uuid":
+        return randomUUID();
+      default:
+        return randomString(8, CHARSETS.alpha) + i;
     }
   };
   const count = Math.min(1000, Math.max(1, Math.floor(rows)));
-  const data = Array.from({ length: count }, (_, i) => Object.fromEntries(fields.map((f) => [f.name, make(f.type, i)])));
+  const data = Array.from({ length: count }, (_, i) =>
+    Object.fromEntries(fields.map((f) => [f.name, make(f.type, i)]))
+  );
   return { ok: true, text: JSON.stringify(data, null, 2) };
 }
 
@@ -109,7 +121,8 @@ export function sqlInserts(table: string, json: string): { ok: true; text: strin
     return { ok: false, message: "JSON must be an array of objects." };
   }
   const columns: string[] = [];
-  for (const r of rows as Record<string, unknown>[]) for (const k of Object.keys(r)) if (!columns.includes(k)) columns.push(k);
+  for (const r of rows as Record<string, unknown>[])
+    for (const k of Object.keys(r)) if (!columns.includes(k)) columns.push(k);
   if (columns.length === 0) return { ok: false, message: "Objects have no fields." };
   const literal = (v: unknown): string => {
     if (v === null || v === undefined) return "NULL";

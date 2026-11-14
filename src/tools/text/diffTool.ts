@@ -39,11 +39,11 @@ export function formatDifferences(lines: DiffLine[]): string {
 }
 
 export async function run(): Promise<void> {
-  const seed = vscode.window.activeTextEditor?.document.getText(
-    vscode.window.activeTextEditor.selection
-  ) ?? "";
+  const seed = vscode.window.activeTextEditor?.document.getText(vscode.window.activeTextEditor.selection) ?? "";
   await openPair(seed, "");
-  void vscode.window.showInformationMessage("Paste text into both sides to compare. Use Dev Tool: Swap Diff Sides or Clear Diff Inputs as needed.");
+  void vscode.window.showInformationMessage(
+    "Paste text into both sides to compare. Use Dev Tool: Swap Diff Sides or Clear Diff Inputs as needed."
+  );
 }
 
 export async function swap(): Promise<void> {

@@ -2,9 +2,7 @@
 // The secret is passed in for this one call. Nothing here stores it.
 import { createHmac, timingSafeEqual } from "crypto";
 
-export type VerifyResult =
-  | { ok: true; valid: boolean; alg: string; message: string }
-  | { ok: false; message: string };
+export type VerifyResult = { ok: true; valid: boolean; alg: string; message: string } | { ok: false; message: string };
 
 const HMAC: Record<string, string> = { HS256: "sha256", HS384: "sha384", HS512: "sha512" };
 
@@ -14,7 +12,10 @@ function b64urlToBuffer(s: string): Buffer {
 }
 
 export function verifyJwtHmac(token: string, secret: string): VerifyResult {
-  const parts = token.trim().replace(/^Bearer\s+/i, "").split(".");
+  const parts = token
+    .trim()
+    .replace(/^Bearer\s+/i, "")
+    .split(".");
   if (parts.length !== 3) return { ok: false, message: "A JWT has three dot-separated parts." };
   if (secret === "") return { ok: false, message: "Enter the secret to verify the signature." };
 
@@ -29,9 +30,10 @@ export function verifyJwtHmac(token: string, secret: string): VerifyResult {
   if (!digest) {
     return {
       ok: false,
-      message: alg === "none"
-        ? 'This token is unsigned (alg "none"), so there is nothing to verify.'
-        : `Only HMAC algorithms (HS256, HS384, HS512) can be checked with a secret. This token uses ${alg}.`
+      message:
+        alg === "none"
+          ? 'This token is unsigned (alg "none"), so there is nothing to verify.'
+          : `Only HMAC algorithms (HS256, HS384, HS512) can be checked with a secret. This token uses ${alg}.`
     };
   }
 

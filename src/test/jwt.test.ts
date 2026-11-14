@@ -2,8 +2,10 @@ import { test } from "node:test";
 import * as assert from "node:assert/strict";
 import { decodeJwt, claimDates } from "../tools/developer/jwt";
 
-const b64url = (o: unknown) => Buffer.from(JSON.stringify(o)).toString("base64").replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
-const token = (payload: unknown, header: unknown = { alg: "HS256", typ: "JWT" }) => `${b64url(header)}.${b64url(payload)}.c2ln`;
+const b64url = (o: unknown) =>
+  Buffer.from(JSON.stringify(o)).toString("base64").replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
+const token = (payload: unknown, header: unknown = { alg: "HS256", typ: "JWT" }) =>
+  `${b64url(header)}.${b64url(payload)}.c2ln`;
 
 test("decodes header and payload", () => {
   const r = decodeJwt(token({ sub: "42", name: "ann" }), new Date(0));

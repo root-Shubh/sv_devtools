@@ -32,7 +32,10 @@ export async function runTransform(label: string, transform: Transform, language
   }
 }
 
-export async function pickAction(placeHolder: string, actions: { label: string; run: () => Promise<void> }[]): Promise<void> {
+export async function pickAction(
+  placeHolder: string,
+  actions: { label: string; run: () => Promise<void> }[]
+): Promise<void> {
   const pick = await vscode.window.showQuickPick(
     actions.map((a) => ({ label: a.label, action: a })),
     { placeHolder }
