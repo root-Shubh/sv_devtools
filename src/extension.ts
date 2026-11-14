@@ -5,6 +5,7 @@ import { TOOLS } from "./tools/registry";
 import { ToolState } from "./state/toolState";
 import { loadTool, registerTool } from "./tools/loader";
 import { registerContextActions } from "./ui/contextActions";
+import { registerFileActions } from "./ui/fileActions";
 
 export function activate(context: vscode.ExtensionContext): void {
   registerTool("text-diff", async () => (await import("./tools/text/diffTool")).tool);
@@ -23,6 +24,7 @@ export function activate(context: vscode.ExtensionContext): void {
   registerTool("encoding-conversion", async () => (await import("./tools/encoding/conversionTool")).tool);
   registerTool("generators", async () => (await import("./tools/generators/generatorsTool")).tool);
   registerContextActions(context);
+  registerFileActions(context);
   registerTool("developer-references", async () => (await import("./tools/developer/referencesTool")).tool);
   registerTool("developer-utilities", async () => (await import("./tools/developer/utilitiesTool")).tool);
   registerTool("jwt-decode", async () => (await import("./tools/developer/jwtTool")).tool);
