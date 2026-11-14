@@ -5,6 +5,19 @@
   "version": "0.1.0",
   "publisher": "root-shubh",
   "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/root-Shubh/sv_devtools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/root-Shubh/sv_devtools/issues"
+  },
+  "homepage": "https://github.com/root-Shubh/sv_devtools#readme",
+  "galleryBanner": {
+    "color": "#1f6feb",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -17,6 +30,10 @@
     "regex",
     "json",
     "base64",
+    "url encode",
+    "uuid",
+    "hash",
+    "jwt",
     "utilities"
   ],
   "main": "./out/extension.js",
@@ -222,6 +239,7 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/vscode": "^1.85.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "3.9.1"
   }
 }
