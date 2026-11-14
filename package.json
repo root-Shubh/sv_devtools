@@ -1,0 +1,39 @@
+{
+  "name": "sv-devtools",
+  "displayName": "Dev Tool",
+  "description": "A lightweight developer toolbox: text diff, regex, JSON, encoding, generators and developer utilities.",
+  "version": "0.1.0",
+  "publisher": "root-shubh",
+  "license": "MIT",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "keywords": ["developer tools", "diff", "regex", "json", "base64", "utilities"],
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "devtool", "title": "Dev Tool", "icon": "media/icon.svg" }
+      ]
+    },
+    "views": {
+      "devtool": [
+        { "id": "devtool.tools", "name": "Tools" }
+      ]
+    },
+    "commands": [
+      { "command": "devtool.openTool", "title": "Dev Tool: Open Tool" }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node --test out/test/",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
