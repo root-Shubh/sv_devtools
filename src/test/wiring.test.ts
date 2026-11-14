@@ -37,3 +37,8 @@ test("keybindings target only contributed commands", () => {
     assert.ok(commands.has(k.command), `unknown command in keybinding: ${k.command}`);
   }
 });
+
+test("opening a tool loads its module (no placeholder message)", () => {
+  assert.match(extensionSource, /loadTool\(tool\.id\)/);
+  assert.doesNotMatch(extensionSource, /not implemented yet/);
+});

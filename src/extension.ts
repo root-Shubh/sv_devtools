@@ -3,7 +3,7 @@ import { ToolTreeProvider } from "./views/toolTree";
 import { searchTools } from "./views/searchTools";
 import { TOOLS } from "./tools/registry";
 import { ToolState } from "./state/toolState";
-import { hasTool, loadTool, registerTool } from "./tools/loader";
+import { loadTool, registerTool } from "./tools/loader";
 import { registerContextActions } from "./ui/contextActions";
 
 export function activate(context: vscode.ExtensionContext): void {
@@ -45,10 +45,19 @@ export function activate(context: vscode.ExtensionContext): void {
       void vscode.window.showInformationMessage(`Unknown tool: ${toolId}`);
       return;
     }
+    const loading = loadTool(tool.id);
+    if (!loading) {
+      void vscode.window.showErrorMessage(`${tool.label} has no loader registered.`);
+      return;
+    }
     await state.markUsed(toolId);
     tree.refresh();
-    // Tools are not implemented yet. Later phases load each tool lazily here.
-    void vscode.window.showInformationMessage(`${tool.label} is not implemented yet.`);
+    try {
+      const module = await loading;
+      await module.run();
+    } catch (err) {
+      void vscode.window.showErrorMessage(`${tool.label} failed: ${err instanceof Error ? err.message : String(err)}`);
+    }
   };
 
   context.subscriptions.push(
