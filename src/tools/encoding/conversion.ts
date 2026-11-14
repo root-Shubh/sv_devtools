@@ -54,7 +54,7 @@ export function textToHex(text: string): Conv {
 
 export function hexToText(hex: string): Conv {
   const cleaned = hex.replace(/0x/gi, "").replace(/[\s,]/g, "");
-  if (cleaned === "") return { ok: false, message: "Input is empty." };
+  if (cleaned === "") return { ok: true, text: "" }; // empty encodes to empty, so round trips work
   if (!/^[0-9a-fA-F]+$/.test(cleaned) || cleaned.length % 2 !== 0) {
     return { ok: false, message: "Hex input must be pairs of 0-9 and a-f." };
   }
@@ -69,7 +69,7 @@ export function textToBinary(text: string): Conv {
 
 export function binaryToText(bits: string): Conv {
   const cleaned = bits.replace(/[\s,]/g, "");
-  if (cleaned === "") return { ok: false, message: "Input is empty." };
+  if (cleaned === "") return { ok: true, text: "" };
   if (!/^[01]+$/.test(cleaned) || cleaned.length % 8 !== 0) {
     return { ok: false, message: "Binary input must be groups of 8 bits (0 and 1)." };
   }

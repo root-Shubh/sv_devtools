@@ -11,7 +11,8 @@ export function base64Encode(text: string): CodecResult {
 export function base64Decode(text: string): CodecResult {
   // Accept URL-safe alphabet and whitespace/newlines from copy-paste.
   const normalized = text.replace(/\s+/g, "").replace(/-/g, "+").replace(/_/g, "/");
-  if (normalized.length === 0) return { ok: false, message: "Input is empty." };
+  // Empty text is valid: it is what an empty string encodes to, so round trips work.
+  if (normalized.length === 0) return { ok: true, text: "" };
   if (!STRICT.test(normalized) || normalized.length % 4 === 1) {
     return { ok: false, message: "Input is not valid Base64." };
   }

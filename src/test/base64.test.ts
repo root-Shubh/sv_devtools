@@ -23,8 +23,9 @@ test("rejects invalid Base64", () => {
   assert.equal(base64Decode("a").ok, false);
 });
 
-test("rejects empty input", () => {
-  assert.equal(base64Decode("   ").ok, false);
+test("empty and whitespace-only input decode to empty text", () => {
+  assert.deepEqual(base64Decode(""), { ok: true, text: "" });
+  assert.deepEqual(base64Decode("   "), { ok: true, text: "" });
   assert.deepEqual(base64Encode(""), { ok: true, text: "" });
 });
 
